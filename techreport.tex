@@ -567,7 +567,7 @@ We will give more discussions on the underlying reasons of our algorithm in the 
 \subsection{Proofs of Collusion and Profit Trading Resistance}
 We now show that Algorithm \ref{alg:np} can not only resist collusion attacks (by achieving group strategyproofness), but also eradicate the possibility of any profit trading (by achieving n-truthfulness). Parametric Dependency Graph (PDG) will be used to judge whether the strategyproof equilibrium can be group strategyproof or n-truthful.
 
-Now we can show our main results:
+{\color{blue} Before we introduce our main results, we need Lemma \ref{lem:quadratic}, which gives the strategyproof equilibrium for the discrete crowdsensing game. }
 \begin{figure}[!t]
 \centering{}
 \setlength{\unitlength}{1cm}
@@ -605,6 +605,7 @@ Now we can show our main results:
 \begin{lemma}
 \label{lem:quadratic}
 The nonnegative integer $n_i$ that maximizes the user utility $u_i = p_i - \kappa_in_i$ is $\max_{i\in U} \{m-\lfloor \kappa_i/d \rfloor, 0\}$.
+{\color{blue} That is, if any $n_i = \max_{i\in U} \{m-\lfloor \kappa_i/d \rfloor, 0\}$, then the discrete crowdsensing game achieves strategyproof equilibrium. }
 \end{lemma}
 \begin{IEEEproof}
 In fact the utility may be real-extended into a concave quadratic function as follows:
@@ -612,6 +613,7 @@ In fact the utility may be real-extended into a concave quadratic function as fo
 Its function graph is a parabola with the axis of symmetry $\hat{x}=m-\frac{\kappa_i}{d}+\frac{1}{2}$. It is easy to verify that the integer closest to the axis of symmetry can obtain the maximum utility. Figure \ref{fig:quad_prop} gives the two possible cases of the axis position. For both cases $m-\lfloor \kappa_i/d \rfloor$ is the integer closest to the symmetric axis.\footnote{It is possible that the axis satisfies both the cases. Then it has two nearest integers and we can choose either of them.} If the closest integer is nonnegative, we get the desired $n_i$ immediately. If the closest integer is negative, then the axis of symmetry must reside to the left of the $y$ axis. Hence the utility function monotonically decreases over $[0,+\infty)$. As a result the nonnegative integer $n_i$ that maximizes $u_i$ must be 0. Both cases give the lemma.
 \end{IEEEproof}
 
+Now we can show our main results, Theorem \ref{thm:discrete}.
 \begin{theorem}
 \label{thm:discrete}
 For any discrete crowdsensing game with user utility equation $u_i = p_i - \kappa_in_i$, the incentive mechanism given by Algorithm \ref{alg:np} can achieve group strategyproof and n-truthful equilibrium.
@@ -887,7 +889,7 @@ This paper has systematically researched collusion attacks, including profit tra
 
 \bibliographystyle{./IEEEtran}
 \bibliography{./13fall_1ed}
-\pagebreak
+%\pagebreak
 
 \appendix
 {\color{black}
