@@ -406,6 +406,8 @@ For example in location based sensing \cite{Alt2010Location,Liu2013A}, if a crow
 In discrete crowdsensing model, the whole sensing work consists of a number of tasks (chunk data, aggregated nodes, etc.). Each user $i$ suffers a cost unit $\kappa_i$ by finishing one sensing task. User $i$ reports its cost unit to the platform as a strategy $s_i$ (may be different from $\kappa_i$), and as a response the platform lets user $i$ know its assigned number of tasks $n_i$ and the promised payment $p_i$ once user $i$ finishes the $n_i$ assigned tasks. Hence the utility of user $i$ is $u_i = p_i - \kappa_i n_i$. %Given the total gain $R$ of the whole sensing work, the platform utility is $u_p = R - \sum_{i\in U} p_i$.
 
 {\color{blue} 
+We assume for each user $i$, its cost unit $\kappa_i$ must fall in some publicly known interval $[\underline{\kappa}_i,\overline{\kappa}_i]$. The lower and upper bounds can be found by the historical distribution of claimed cost units from user $i$ \cite{koutsopoulos2013optimal}.
+
 Note that in many practical applications, the total number of discrete sensing tasks is upper bounded \cite{Alt2010Location,Liu2013A,li2012location}. We also assume the payment sum is upper bounded by the budget $B$. To upper bound each $n_i$, we introduce $P_m$, the maximum payment to any user. Let $n$ be the number of participating users. Then we require $B\geq nP_m$. On the other hand, for each user, the assigned number of sensing tasks cannot exceed the number of remaining tasks to do. Otherwise, the platform will not allow the user to do any task. This is reflected by the threshold $R$, the number of remaining tasks in Algorithm \ref{alg:np}.
 }
 
