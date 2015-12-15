@@ -127,6 +127,7 @@ $m$	& number of partitions\\
 $d$ & partition length\\
 $f(x, y_0)$ & the slice function of $f(x,y)$ by fixing $y = y_0$\\
 $B$ & budget, upper bound of the payment sum $\sum p_i$\\
+$R$ & the number of remaining sensing tasks to do\\
 \bottomrule
 \smallskip
 \end{tabular}
@@ -138,7 +139,7 @@ $B$ & budget, upper bound of the payment sum $\sum p_i$\\
 \subsection{Crowdsensing Game}
 \label{subsec:CG}
 {
-We introduce the general game model of crowdsensing system, which is used in the majority of existing literatures \cite{yang2012crowdsourcing,koutsopoulos2013optimal,luo2014profit,zhang2014free,liu2014social,yan2015ifc}. The crowdsensing system consists of $n$ participating users\footnote{Participating users are all the users who are \emph{willing} to contribute in the crowdsensing work.} (i.e. smartphones, mobile sensors) and one crowdsensing platform (i.e. BOINC \cite{anderson2004boinc}). The $n$ users voluntarily participate in crowdsensing and contribute their sensing results. The platform aggregates the sensing results from the $n$ users and maintains the crowdsensing system. %For each contributing user\footnote{contributing users are the users who \emph{actually} participate in the crowdsensing by \emph{contributing} sensing work.}, sensing work incurs cost in monetary form, such as battery charge and communication fees. 
+We introduce the general game model of crowdsensing system, which is used in the majority of existing literatures \cite{yang2012crowdsourcing,koutsopoulos2013optimal,luo2014profit,zhang2014free,liu2014social,yan2015ifc}. The crowdsensing system consists of $n$ participating users, who are all the users \emph{willing} to contribute in the crowdsensing work (e.g. smartphones, mobile sensors) and one crowdsensing platform (e.g. BOINC \cite{anderson2004boinc}). The $n$ users voluntarily participate in crowdsensing and contribute their sensing results. The platform aggregates the sensing results from the $n$ users and maintains the crowdsensing system. %For each contributing user\footnote{contributing users are the users who \emph{actually} participate in the crowdsensing by \emph{contributing} sensing work.}, sensing work incurs cost in monetary form, such as battery charge and communication fees. 
 To compensate the users' sensing costs and stimulate their participation, the platform distributes some payment to each user as the reward. The payment is determined by each user's strategy (i.e., its claimed sensing cost). Denote by $c_i$ the sensing cost of user $i$, and let $p_i$ be the promised payment from the platform to user $i$. If user $i$ can complete the sensing task as promised, then the utility of user $i$ is
 \begin{equation}
 \label{eqn:user_utility_1}
@@ -329,10 +330,10 @@ Based on Theorem \ref{thm:main}, we need to define some partial order relations 
 In this section, we talk about how to defend against profit trading collusion in the strategyproof crowdsensing game. We have demonstrated that group strategyproof equilibrium can not guarantee profit trading free in Section \ref{subsec:pt}. We next research the criteria in which the strategyproof mechanism can resist any profit trading collusion. The result is Theorem \ref{thm:pt}.
 \begin{theorem}
 \label{thm:pt}
-For any strategyproof crowdsensing incentive mechanism with user utility equation (\ref{eqn:user_utility_2}), the mechanism can achieve n-Truthfulness\footnote{Here n denotes the number of all the participating users: $\mathrm{n}=|U|$.}, if and only if its parametric dependency graph $G=(U,E)$ satisfies $E=\emptyset$.
+For any strategyproof crowdsensing incentive mechanism with user utility equation (\ref{eqn:user_utility_2}), the mechanism can achieve $n$-Truthfulness, where $n$ denotes the number of all the participating users: $n=|U|$, if and only if its parametric dependency graph $G=(U,E)$ satisfies $E=\emptyset$.
 \end{theorem}
 \begin{IEEEproof}
-We first show the necessity by proving the contrapositive. That is, there may exist a couple of users that may collude to trade profit, if there is at least one edge in the PDG of the game. We may assume there exists one edge from user $i$ to $j$ in the PDG, indicating $u_i$ is parametric dependent on $s_j$. Note that it is impossible to have a path from $j$ to $i$. Otherwise, the PDG is cyclic and thus there must exist a subset of users that may succeed to collude based on Lemma \ref{lem:bf}.\footnote{In fact, the collusion here is valid without profit trading, since cyclic PDG means there is no means to achieve group strategyproof equilibrium in order to resist collusion.} Then we have
+We first show the necessity by proving the contrapositive. That is, there may exist a couple of users that may collude to trade profit, if there is at least one edge in the PDG of the game. We may assume there exists one edge from user $i$ to $j$ in the PDG, indicating $u_i$ is parametric dependent on $s_j$. Note that it is impossible to have a path from $j$ to $i$. Otherwise, the PDG is cyclic and thus there must exist a subset of users that may succeed to collude based on Lemma \ref{lem:bf}. In fact, the collusion here is valid without profit trading, since cyclic PDG means there is no means to achieve group strategyproof equilibrium in order to resist collusion. Then we have
 \begin{equation}
 \label{eqn:uij}
 \begin{aligned}
@@ -404,6 +405,10 @@ For example in location based sensing \cite{Alt2010Location,Liu2013A}, if a crow
 
 In discrete crowdsensing model, the whole sensing work consists of a number of tasks (chunk data, aggregated nodes, etc.). Each user $i$ suffers a cost unit $\kappa_i$ by finishing one sensing task. User $i$ reports its cost unit to the platform as a strategy $s_i$ (may be different from $\kappa_i$), and as a response the platform lets user $i$ know its assigned number of tasks $n_i$ and the promised payment $p_i$ once user $i$ finishes the $n_i$ assigned tasks. Hence the utility of user $i$ is $u_i = p_i - \kappa_i n_i$. %Given the total gain $R$ of the whole sensing work, the platform utility is $u_p = R - \sum_{i\in U} p_i$.
 
+{\color{blue} 
+Note that in many practical applications, the total number of discrete sensing tasks is upper bounded \cite{Alt2010Location,Liu2013A,li2012location}. We also assume the payment sum is upper bounded by the budget $B$. To upper bound each $n_i$, we introduce $P_m$, the maximum payment to any user. Let $n$ be the number of participating users. Then we require $B\geq nP_m$. On the other hand, for each user, the assigned number of sensing tasks cannot exceed the number of remaining tasks to do. Otherwise, the platform will not allow the user to do any task. This is reflected by the threshold $R$, the number of remaining tasks in Algorithm \ref{alg:np}.
+}
+
 %{\color{black}Since cost unit may leak user identity (Section \ref{subsec:ppta}), it is beneficial to seek the solution that can well preserve the privacy of cost units. Our objective is to make each user indistinguishable among other users, who have close cost units, i.e. the values $\kappa_i$ fall within some partition $[I_k, I_{k+1}]$.}
 
 
@@ -415,19 +420,24 @@ In discrete crowdsensing model, the whole sensing work consists of a number of t
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 \begin{algorithmic}[1]
-\Require{$[\underline{\kappa}_i, \overline{\kappa}_i]$: the publicly known range of user $i$'s cost unit; $P_m$: maximum payment to user $i$; $s_i$: strategy (claimed cost unit) from user $i$.}
-\Ensure{$n$: number of assigned tasks that each user should finish; $p$: payment to each user.}
-\State $d \gets \frac{1}{2}\min_{i\in U} \overline{\kappa}_i - \underline{\kappa}_i$;
+\Require{$[\underline{\kappa}_i, \overline{\kappa}_i]$: the publicly known range of user $i$'s cost unit; $P_m$: maximum payment to each user; $s_i$: strategy (claimed cost unit) from user $i$; $R$: number of remaining tasks.}
+\Ensure{$\overline{n}$: number of assigned tasks that each user should finish; $\overline{p}$: payment to each user.}
+\State $d \gets \frac{1}{2}\min_{i\in U} \overline{\kappa}_i - \underline{\kappa}_i$, $r\gets R$;
 \State Choose the maximum integer $m$ s.t. $\frac{1}{2}m(m+1)d \leq P_m$;
 \If {$md > \max_{i\in U} \overline{\kappa}_i$}
 	\State $d \gets \max_{i\in U} \overline{\kappa}_i/m$;
 \EndIf
-\For {each user $i\in U$}
+\For {each user $i$ in the FIFO queue}
 	\State $n_i \gets \max \left\{ m-\lfloor \frac{s_i}{d}\rfloor, 0 \right\}$;
-	\State $p_i \gets \sum_{j=m+1-n_i}^m jd = \frac{1}{2}n_i(2m+1-n_i)d$;
+	\If {$n_i < r$}
+		\State $p_i \gets \sum_{j=m+1-n_i}^m jd = \frac{1}{2}n_i(2m+1-n_i)d$;
+	\Else
+		\State $n_i \gets 0$, $p_i\gets 0$;
+	\EndIf
+	\State $r \gets r-n_i$;
 \EndFor
-\State Let $n := \bigsqcup_{i\in U} \{n_i\}$, $p := \bigsqcup_{i\in U} \{p_i\}$;
-\State {\bf return} $(n, p)$;
+\State Let $\overline{n} := \bigsqcup_{i\in U} \{n_i\}$, $\overline{p} := \bigsqcup_{i\in U} \{p_i\}$;
+\State {\bf return} $(\overline{n}, \overline{p})$;
 \end{algorithmic}
 \end{small}
 \end{algorithm}
@@ -494,7 +504,7 @@ The platform assigns sensing tasks and computes the payment to each user based o
 {\color{black}We give our algorithm idea as follows:
 \itemcount 1\relax
 \bolditem Firstly we {\it partition} the cost unit interval $[0, +\infty)$. Our algorithm chooses the partition length $d$ as half of the minimum interval length of $[\underline{\kappa}_i, \overline{\kappa}_i]$, and chooses the number of partitions allowed by the maximum possible payment $P_m$, {\color{blue}which can be given by the budget $B$, i.e., $B\geq P_m\cdot n$}. The platform will reduce the value of $d$ if $md$ is larger than the maximum possible cost unit. Then our algorithm divides $[0, +\infty)$ into $m+1$ partitions, with $m$ of them are of length $d$ and the rightmost one is $[md, +\infty)$. By doing this, none of the cost unit range intervals $K_i=[\underline{\kappa}_i, \overline{\kappa}_i]$ can completely reside within any partition here. Figure \ref{fig:d_idea} presents the resulted scenario by our choice of $d$. Small partition intervals may be beneficial to our truthful mechanism, as we will see later. 
-\bolditem Then our algorithm computes $n_i$ and $p_i$ for each user $i$. The {\it higher} strategy $s_i$ the user claims, the {\it fewer} tasks will be assigned to the user. The payment is determined by which interval the strategy $s_i$ falls in. Figure \ref{fig:discrete_idea} gives the overview of our computation idea, i.e. the payment is the total area of the horizontal slices.
+\bolditem Then our algorithm computes $n_i$ and $p_i$ for each user $i$. {\color{blue}We use an FIFO queue to store the applications from the users. That is, user $i$ who submits her application \emph{earlier} that user $j$ can get the feedback $(n_i, p_i)$ \emph{earlier} than $j$. On the other hand, for each application, the {\it higher} strategy $s_i$ the user $i$ claims, the {\it fewer} tasks will be assigned to the user $i$. Overall, the payment is determined by when user $i$ submits her application, and which interval the strategy $s_i$ falls in.} Figure \ref{fig:discrete_idea} gives the overview of our computation idea, i.e. the payment is the total area of the horizontal slices.
 }
 
 We will give more discussions on the underlying reasons of our algorithm in the following sections.
@@ -555,7 +565,8 @@ We will give more discussions on the underlying reasons of our algorithm in the 
 \put (-1.2,2.25){\vector(1,0){0.2}}
 \put (-1.8,2.25){\vector(-1,0){2.2}}
 % put an equation
-\put (0.0,3){$p_i = \sum_{j=3}^7 jd = 25d.$}
+\put (0.0,3){$p_i = \sum_{j=3}^7 jd = 25d$.}
+\put (0.0,2.5){$R\geq 5$.}
 \put (-4.2,2.4){5}
 \put (-4.2,1.9){4}
 \put (-4.2,1.4){3}
@@ -563,7 +574,7 @@ We will give more discussions on the underlying reasons of our algorithm in the 
 \put (-4.2,0.4){1}
 \multiput (-4.0,2.5)(0.2,0){14}{\line (1,0){0.1}}
 \end{picture}
-\caption{\color{black}The computation of the payment $p_i$. If user $i$ truthfully strategizes $s_i=\kappa_i$, its payment will be $25d$.}
+\caption{\color{black}The computation of the payment $p_i$. If user $i$ truthfully strategizes $s_i=\kappa_i$, its payment will be $25d$. Here we assume $R\geq 5$. Otherwise, $n_i=p_i=0$.}
 \label{fig:discrete_idea}
 \end{figure}
 
@@ -614,7 +625,7 @@ The nonnegative integer $n_i$ that maximizes the user utility $u_i = p_i - \kapp
 \begin{IEEEproof}
 In fact the utility may be real-extended into a concave quadratic function as follows:
 \[ u_i(n_i) = p_i - \kappa_in_i = \frac{1}{2}n_i(2m+1-n_i)d - \kappa_in_i. \]
-Its function graph is a parabola with the axis of symmetry $\hat{x}=m-\frac{\kappa_i}{d}+\frac{1}{2}$. It is easy to verify that the integer closest to the axis of symmetry can obtain the maximum utility. Figure \ref{fig:quad_prop} gives the two possible cases of the axis position. For both cases $m-\lfloor \kappa_i/d \rfloor$ is the integer closest to the symmetric axis.\footnote{It is possible that the axis satisfies both the cases. Then it has two nearest integers and we can choose either of them.} If the closest integer is nonnegative, we get the desired $n_i$ immediately. If the closest integer is negative, then the axis of symmetry must reside to the left of the $y$ axis. Hence the utility function monotonically decreases over $[0,+\infty)$. As a result the nonnegative integer $n_i$ that maximizes $u_i$ must be 0. Both cases give the lemma.
+Its function graph is a parabola with the axis of symmetry $\hat{x}=m-\frac{\kappa_i}{d}+\frac{1}{2}$. It is easy to verify that the integer closest to the axis of symmetry can obtain the maximum utility. Figure \ref{fig:quad_prop} gives the two possible cases of the axis position. For both cases $m-\lfloor \kappa_i/d \rfloor$ is the integer closest to the symmetric axis. It is possible that the axis satisfies both the cases. Then it has two nearest integers and we can choose either of them. If the closest integer is nonnegative, we get the desired $n_i$ immediately. If the closest integer is negative, then the axis of symmetry must reside to the left of the $y$ axis. Hence the utility function monotonically decreases over $[0,+\infty)$. As a result the nonnegative integer $n_i$ that maximizes $u_i$ must be 0. Both cases give the lemma.
 \end{IEEEproof}
 
 Now we can show our main results, Theorem \ref{thm:discrete}.
@@ -784,7 +795,7 @@ To verify all the collusion resistance results, we have designed five simulation
 
 \subsection{Default Parameters and Settings}
 Before we give the detailed simulation results, let us see some default settings of our simulations. There are 100 participating users. Each user reports a claimed cost unit as its strategy, and the platform returns the required number of sensing tasks and the promised payments based on all the user strategies. We assume the maximum cost unit $\kappa_{max}$ is 10.0. %The baseline crowdsensing gain $R$ of the platform is 100. 
-Any coefficient $\lambda_i$ for user $i$ is no more than 20.0. To generate the cost units randomly, we always assume they are uniformly distributed within the interval $[0.01,\kappa_{max}]$.\footnote{In our simulation we assume 0.01 is the least cost unit one user can have.} We assume each colluded user randomly strategizes within the perturbation interval, whose radius is the user's perturbation size. Formally, for $\kappa_i$, if the perturbation size is $\theta$, then the perturbation interval is $[\max\{\kappa_i-\theta,0.01\},\kappa_i+\theta]$. Given the perturbation interval, in order to earn more payment, each colluded user prefers to make its strategy as low as possible, since lower strategy usually means higher participation level and thus more payment from the platform. For example, a colluded user $i$'s cost unit is 1.0, and the perturbation size is 2.0. Then this user $i$ has probability of 25\% to claim $s_i=0.01$, and 75\% to claim a strategy larger than 0.01. Defaultly we assume half of the users are colluding. The perturbation size is 5.0. The maximum payment to each user is 100. Each measurement takes 1000 test samples. One may see \cite{mycodes} for the source code of our simulations.
+Any coefficient $\lambda_i$ for user $i$ is no more than 20.0. To generate the cost units randomly, we always assume they are uniformly distributed within the interval $[0.01,\kappa_{max}]$. In our simulation we assume 0.01 is the least cost unit one user can have. We assume each colluded user randomly strategizes within the perturbation interval, whose radius is the user's perturbation size. Formally, for $\kappa_i$, if the perturbation size is $\theta$, then the perturbation interval is $[\max\{\kappa_i-\theta,0.01\},\kappa_i+\theta]$. Given the perturbation interval, in order to earn more payment, each colluded user prefers to make its strategy as low as possible, since lower strategy usually means higher participation level and thus more payment from the platform. For example, a colluded user $i$'s cost unit is 1.0, and the perturbation size is 2.0. Then this user $i$ has probability of 25\% to claim $s_i=0.01$, and 75\% to claim a strategy larger than 0.01. Defaultly we assume half of the users are colluding. The perturbation size is 5.0. The maximum payment to each user is 100. Each measurement takes 1000 test samples. One may see \cite{mycodes} for the source code of our simulations.
 
 %\subsection{Continuous Model Evaluations}
 %\begin{figure*}[!t]
