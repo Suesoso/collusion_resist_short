@@ -1,4 +1,4 @@
-# This program evaluates the running time of the mechanisms.
+# This program evaluates the budget utilization rho.
 
 import random
 import math
@@ -13,11 +13,11 @@ rt = 1000
 # the maximum payment to each user is 100.
 Pm = 100
 # Total budget of the platform is 10000.
-R = 10000
+R = 1000
 # Platform utility
 u_p = R
 # The outputs will be stored in the text file loss_truthful_dis.txt
-f = open('running_time.txt', 'w')
+f = open('rho.txt', 'w')
 # Test samples 1000
 n_test = 1000;
 
@@ -46,11 +46,12 @@ while n<1000:	# 100 to 1000..
 	n = n + 100;	# with step of 100.
 	
 	# our mechanism
-	run_time = time.time()	# start timing...
 	Pm = R/n
-	remaining = rt	# remaining tasks
 	
+	ratio = 0
+	sq_ratio = 0
 	for i in range(n_test):
+		remaining = rt	# remaining tasks
 		# Initialize the users.
 		users = []
 		for i in range(n):
@@ -73,6 +74,7 @@ while n<1000:	# 100 to 1000..
 
 		# Let us compute the sensing time and the payment for each user.
 		# Also we calculate each user utility and the platform utility.
+		psum = 0
 		for user in users:
 			user.n_tasks = m - math.floor(user.s / d)
 			if user.n_tasks > remaining:
@@ -83,40 +85,14 @@ while n<1000:	# 100 to 1000..
 			user.u = user.p - user.k * user.n_tasks
 			u_p = u_p - user.p	
 			remaining = remaining - user.n_tasks
-	
-	result1 = (time.time()-run_time)/n_test*1000
-	
-	# infocom 13 mechanism
-	run_time = time.time()	# start timing...
-	
-	for i in range(n_test):
-		remaining = rt	# remaining tasks
-		# Initialize the users.
-		users = []
-		for i in range(n):
-			users.append(SensingUser())
-
-		# Let us compute the sensing time and the payment for each user.
-		# Also we calculate each user utility and the platform utility.
-		m = 100
-		d = 0.1
-		for user in users:
-			sum = 0
-			for k in range(n/100):
-				sum = sum + users[k].s
-			user.n_tasks = m - math.floor(sum / n / d*100)
-			if user.n_tasks > remaining:
-				user.n_tasks = 0
-			if user.n_tasks < 0:
-				user.n_tasks = 0
-			user.p = d * user.n_tasks * (2*m + 1 - user.n_tasks) / 2.0
-			user.u = user.p - user.k * user.n_tasks
-			u_p = u_p - user.p	
-			remaining = remaining - user.n_tasks
-	
-	result2 = (time.time()-run_time)/n_test*1000
+			psum = psum + user.p
+		
+		immr = psum/R
+		ratio = ratio + immr
+		sq_ratio = sq_ratio + immr*immr
 	
 	# Output the statistical results.
-	f.write('{0:f} {1:f} {2:f} \n'.format(n, result1, result2)) #ms
+	result = ratio/n_test
+	f.write('{0:f} {1:f} {2:f} \n'.format(n, result, sq_ratio/n_test - (ratio/n_test)*(ratio/n_test))) #ms
 	
 f.close()
