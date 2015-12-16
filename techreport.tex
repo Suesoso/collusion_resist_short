@@ -841,11 +841,55 @@ We have rigorously shown that our incentive mechanism can resist any collusion a
 \end{equation}
 \item \emph{Completion of the sensing tasks}, which is the ratio between the number of finished tasks and the total sum of all the tasks. This ratio should be positively related to the budget $B$ as incentives.
 \end{itemize}
+For each item we consider two variables: the number of participating users and the budget.
 
 \subsection{Experiment Setup}
-We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal} using Python 2.7. We ran the programs on 4-core Intel Xeon Processors with 16GB RAM, and SMP Linux with kernel version 3.19.8.
+We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal} using Python 2.7. We ran the programs on 4-core Intel Xeon Processors with 16GB RAM, and SMP Linux with kernel version 3.19.8. Each measurement takes 1000 test samples.
 
 \subsection{Results}
+
+\begin{figure*}[!t]
+\centering
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_running_time.eps}
+\caption{Running time with different sizes of participating users.}
+\label{fig:running_time_n}
+\end{minipage}
+\hspace{0.01cm}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_running_time_R.eps}
+\caption{Running time with different budgets.}
+\label{fig:running_time_R}
+\end{minipage}
+\hspace{0.01cm}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rho.eps}
+\caption{Budget utilization ratio with different sizes of users.}
+\label{fig:rho_n}
+\end{minipage}
+\end{figure*}
+
+
+\begin{figure*}[!t]
+\centering
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rho_R.eps}
+\caption{Budget utilization ratio with different budgets.}
+\label{fig:rho_R}
+\end{minipage}
+\hspace{0.01cm}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rtask_n.eps}
+\caption{Finished task ratio with different sizes of users.}
+\label{fig:rtask_n}
+\end{minipage}
+\hspace{0.01cm}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rtask.eps}
+\caption{Finished task ratio with different budgets.}
+\label{fig:rtask_R}
+\end{minipage}
+\end{figure*}
 
 %This section will show our simulations that support the theoretic results we have obtained in the previous sections. Our crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. 
 %%Furthermore, our discrete model can achieve 0-differential privacy, which has been rigorously proved. 
