@@ -1,5 +1,6 @@
 \documentclass[conference]{IEEEtran}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage{graphicx}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -588,33 +589,72 @@ We now show that Algorithm \ref{alg:np} can not only resist collusion attacks (b
 \begin{figure}[!t]
 \centering{}
 \setlength{\unitlength}{1cm}
-\begin{picture}(4,4)(-1.5,-0.5)
-\put (-4,1){\vector(1,0){4.2}}% draw x axe
-\put (-3,0){\vector(0,1){3.2}} %draw y axe
-\qbezier(-1.2,1.6)(-2.15,1.6)(-2.4,-0.2)% draw graph
-\qbezier(-1.2,1.6)(-0.25,1.6)(0,-0.2)
-\put(-1.2,0){\line(0,1){3.2}} % draw solid lines
-\multiput(-2,0)(0,0.2){16}{\line(0,1){0.1}}	% draw dashed lines
-\multiput(-1,0)(0,0.2){16}{\line(0,1){0.1}}
-\multiput(0,0)(0,0.2){16}{\line(0,1){0.1}}
-\put (-1.4,0.6){$\hat{x}$}
-\put (-1.0,1){\circle{0.1}}
-\put (-0.95,0.6){$\lfloor \hat{x}+\frac{1}{2}\rfloor$}
-\put (-2,-0.5){(a)}% lengend
+%\begin{picture}(4,4)(-1.5,-0.5)
+%\put (-4,1){\vector(1,0){4.2}}% draw x axe
+%\put (-3,0){\vector(0,1){3.2}} %draw y axe
+%\qbezier(-1.2,1.6)(-2.15,1.6)(-2.4,-0.2)% draw graph
+%\qbezier(-1.2,1.6)(-0.25,1.6)(0,-0.2)
+%\put(-1.2,0){\line(0,1){3.2}} % draw solid lines
+%\multiput(-2,0)(0,0.2){16}{\line(0,1){0.1}}	% draw dashed lines
+%\multiput(-1,0)(0,0.2){16}{\line(0,1){0.1}}
+%\multiput(0,0)(0,0.2){16}{\line(0,1){0.1}}
+%\put (-1.4,0.6){$\hat{x}$}
+%\put (-1.0,1){\circle{0.1}}
+%\put (-0.95,0.6){$\lfloor \hat{x}+\frac{1}{2}\rfloor$}
+%\put (-2,-0.5){(a)}% lengend
+%
+%\put (1,1){\vector(1,0){4.2}}% draw x axe
+%\put (2,0){\vector(0,1){3.2}} %draw y axe
+%\qbezier(3.2,1.6)(2.25,1.6)(2.0,-0.2)% draw graph
+%\qbezier(3.2,1.6)(4.15,1.6)(4.4,-0.2)
+%\put(3.2,0){\line(0,1){3.2}} % draw solid lines
+%\multiput(3,0)(0,0.2){16}{\line(0,1){0.1}}	% draw dash lines
+%\multiput(4,0)(0,0.2){16}{\line(0,1){0.1}}
+%\multiput(5,0)(0,0.2){16}{\line(0,1){0.1}}
+%\put (3.3,0.6){$\hat{x}$}
+%\put (3.0,1){\circle{0.1}}
+%\put (1.8,0.6){$\lceil \hat{x}-\frac{1}{2}\rceil$}
+%\put (3,-0.5){(b)}% lengend
+%\end{picture}
+\begin{tikzpicture}
+\coordinate (xmin1) at (-4,1);
+\coordinate (xmax1) at (0.3,1);
+\coordinate (ymin1) at (-3,0);
+\coordinate (ymax1) at (-3,3);
 
-\put (1,1){\vector(1,0){4.2}}% draw x axe
-\put (2,0){\vector(0,1){3.2}} %draw y axe
-\qbezier(3.2,1.6)(2.25,1.6)(2.0,-0.2)% draw graph
-\qbezier(3.2,1.6)(4.15,1.6)(4.4,-0.2)
-\put(3.2,0){\line(0,1){3.2}} % draw solid lines
-\multiput(3,0)(0,0.2){16}{\line(0,1){0.1}}	% draw dash lines
-\multiput(4,0)(0,0.2){16}{\line(0,1){0.1}}
-\multiput(5,0)(0,0.2){16}{\line(0,1){0.1}}
-\put (3.3,0.6){$\hat{x}$}
-\put (3.0,1){\circle{0.1}}
-\put (1.8,0.6){$\lceil \hat{x}-\frac{1}{2}\rceil$}
-\put (3,-0.5){(b)}% lengend
-\end{picture}
+\draw (xmax1) node [above] {$n_i$};
+\draw (ymax1) node [right] {$u_i$};
+\draw[-latex] (xmin1)--(xmax1);
+\draw[-latex] (ymin1)--(ymax1);
+\draw (-1.2,0)--(-1.2,3.2);
+\draw[dashed] (-2,0)--(-2,3.2) (-1,0)--(-1,3.2);
+\draw (-1,1) circle (1pt);
+\draw (-1,1) node [below right] {$\lfloor \hat{x}+\frac{1}{2}\rfloor$};
+\draw (-1.2,1) node [below left] {$\hat{x}$};
+\draw (-1.2,1.6) parabola (-2.4,-0.2);
+\draw (-1.2,1.6) parabola (0,-0.2);
+
+\draw (-2,-0.5) node {(a)};% lengend
+
+\coordinate (xmin2) at (0.8,1);
+\coordinate (xmax2) at (4.5,1);
+\coordinate (ymin2) at (2,0);
+\coordinate (ymax2) at (2,3);
+
+\draw (xmax2) node [above] {$n_i$};
+\draw (ymax2) node [right] {$u_i$};
+\draw[-latex] (xmin2)--(xmax2);
+\draw[-latex] (ymin2)--(ymax2);
+\draw (3.2,0)--(3.2,3.2);
+\draw[dashed] (3,0)--(3,3.2) (4,0)--(4,3.2);
+\draw (3,1) circle (1pt);
+\draw (3,1) node [below left] {$\lceil \hat{x}-\frac{1}{2}\rceil$};
+\draw (3.2,1) node [below right] {$\hat{x}$};
+\draw (3.2,1.6) parabola (2,-0.2);
+\draw (3.2,1.6) parabola (4.4,-0.2);
+
+\draw (3,-0.5) node {(b)};% lengend
+\end{tikzpicture}
 \caption{\color{black}Two cases of the parabola symmetric axis. The dashed vertical lines denote $x=k\in\mathbb{Z}$, and each solid vertical line is the symmetric axis of the parabola. Each circled point is the integer closest to the axis.}
 \label{fig:quad_prop}
 \end{figure}
@@ -946,33 +986,65 @@ u_i(s_i)=(s_i-\kappa_i)t_i(s_i)+\int_{s_i}^{+\infty}t_i(s)\mathrm{d}s.
 We discuss the payment $p_i$ and the user utility $u_i$ here in an intuitive way. Figure \ref{fig:truthful_payment} illustrates the geometric relation between payment and user utility. Clearly user utility maximizes at the value $s_i = \kappa_i$ exactly, and the maximum user utility is the area of $ABC$.
 \begin{figure}[!t]
 \centering{}
-\setlength{\unitlength}{1cm}
-\begin{picture}(4.0,4.2)(-2.0,-0.5)
-\put (-4,0){\vector(1,0){7.5}}% draw x axe
-\put (-4,0){\vector(0,1){3.8}} %draw y axe
-\put (-4,3.9){$t_i$}
-% give the t curve
-\qbezier (-4,3.5)(-2,2)(3.5,0.1)
-% give strategy \kappa_i
-\put (-1.5,-0.3){$\kappa_i$}
-\multiput (-1.5,0)(0,0.2){15}{\line (0,1){0.1}}
-\put (-3.1,-0.3){$s_2$}
-\multiput (-3.1,0)(0,0.2){15}{\line (0,1){0.1}}
-\multiput (-3.0,2.9)(0.2,0){8}{\line (1,0){0.1}}
-\put (1.3,-0.3){$s_1$}
-\multiput (1.3,0)(0,0.2){5}{\line (0,1){0.1}}
-\multiput (-1.4,0.9)(0.2,0){14}{\line (1,0){0.1}}
-\put (3.0,-0.3){$s_i$}
-% give labels
-\put (-4.2,-0.3){$O$}
-\put (3.7,-0.1){$B$ $+\infty$}
-\put (-1.4, 2.1){$A$}
-\put (-1.8, 0.1){$C$}
-\put (-1.8, 0.9){$D$}
-\put (1.4, 0.9){$E$}
-\put (-3.2, 3){$F$}
-\put (-1.4, 3){$G$}
-\end{picture}
+%\setlength{\unitlength}{1cm}
+%\begin{picture}(4.0,4.2)(-2.0,-0.5)
+%\put (-4,0){\vector(1,0){7.5}}% draw x axe
+%\put (-4,0){\vector(0,1){3.8}} %draw y axe
+%\put (-4,3.9){$t_i$}
+%% give the t curve
+%\qbezier (-4,3.5)(-2,2)(3.5,0.1)
+%% give strategy \kappa_i
+%\put (-1.5,-0.3){$\kappa_i$}
+%\multiput (-1.5,0)(0,0.2){15}{\line (0,1){0.1}}
+%\put (-3.1,-0.3){$s_2$}
+%\multiput (-3.1,0)(0,0.2){15}{\line (0,1){0.1}}
+%\multiput (-3.0,2.9)(0.2,0){8}{\line (1,0){0.1}}
+%\put (1.3,-0.3){$s_1$}
+%\multiput (1.3,0)(0,0.2){5}{\line (0,1){0.1}}
+%\multiput (-1.4,0.9)(0.2,0){14}{\line (1,0){0.1}}
+%\put (3.0,-0.3){$s_i$}
+%% give labels
+%\put (-4.2,-0.3){$O$}
+%\put (3.7,-0.1){$B$ $+\infty$}
+%\put (-1.4, 2.1){$A$}
+%\put (-1.8, 0.1){$C$}
+%\put (-1.8, 0.9){$D$}
+%\put (1.4, 0.9){$E$}
+%\put (-3.2, 3){$F$}
+%\put (-1.4, 3){$G$}
+%\end{picture}
+\begin{tikzpicture}
+\coordinate (org) at (0,0);
+\coordinate (xmax) at (7.5,0);
+\coordinate (ymax) at (0,3.8);
+\coordinate (s1) at (5.5,0);
+\coordinate (s2) at (1,0);
+\coordinate (si) at (7,0);
+\coordinate (ki) at (2.5,0);
+\coordinate (A) at (2.5,2);
+\coordinate (D) at (2.5,0.8);
+\coordinate (E) at (5.5,0.8);
+\coordinate (F) at (1,2.8);
+\coordinate (G) at (2.5,2.8);
+
+\draw[-latex] (org)--(xmax);
+\draw[-latex] (org)--(ymax); % draw axes
+\draw (org) node [below] {$O$}; % draw labels
+\draw (xmax) node [right] {$B$ $+\infty$}
+	(ymax) node [above] {$t_i$}
+	(s1) node [below] {$s_1$}
+	(s2) node [below] {$s_2$}
+	(si) node [below] {$s_i$}
+	(ki) node [below] {$\kappa_i$}
+	(A) node [above right] {$A$}
+	(ki) node [above left] {$C$}
+	(D) node [above left] {$D$}
+	(E) node [above right] {$E$}
+	(F) node [above] {$F$}
+	(G) node [above right] {$G$};
+\draw[dashed] (s2)--(F)--(G)--(ki) (D)--(E)--(s1); 
+\draw (0,3.5) .. controls (2,2) and (4,1.2) .. (7.5,0.2);
+\end{tikzpicture}
 \caption{The relation between user strategy $s_i$ and user utility $u_i$ in the strategyproof crowdsensing incentive mechanism. Here $s_1 > \kappa_i > s_2$. For $s_1$, we have $u_i(s_1)$ is equal to the area of $DEBC$. For $s_2$, we have $u_i(s_2)$ is equal to the area of $ABC$ minus the area of $AFG$. Obviously the area of user utility maximizes at the value $s_i = \kappa_i$.}
 \label{fig:truthful_payment}
 \end{figure}
@@ -1031,27 +1103,55 @@ For any bivariate function $u(x,y)$ such that $\frac{\partial u}{\partial x}(x_0
 
 \begin{figure}[!t]
 \centering{}
-\setlength{\unitlength}{1cm}
-\begin{picture}(4,4)(-1.5,-0.5)
-\put (-0.5,-0.4){$(x_0,y_0)$}% draw the original point label
-\put (-2.5,0){\vector(1,0){5.0}}% draw x axe
-\put (2.75,-0.05){$x$}
-\put (0,0){\vector(0,1){3.2}} %draw y axe
-\put (0,3.35){$y$}
-\qbezier(0,0)(-1.25,0)(-2.5,2.8)% draw graph
-\qbezier(0,0)(1.25,0)(2.5,2.8)
-\put (-1.2,1.5){$u(x,y)>u(x_0,y_0)$}
-\put (2,0.6){$u(x,y)<u(x_0,y_0)$}
-\put (2,3){$u(x,y)=u(x_0,y_0)$}
-\put (2.1,1.5){$\frac{\partial u}{\partial y}(x_0,y_0)>0$}
-\put (2.8,2.8){\vector(-1,0){0.3}}
-\put (0,0){\vector(1,1){1}}
-\put (0,0){\vector(-1,1){1}}
-\multiput (1,1)(0,-0.1){10}{\line(0,-1){0.05}}
-\multiput (-1,1)(0,-0.1){10}{\line(0,-1){0.05}}
-\put (0.9,-0.4){$x_0+\delta$}
-\put (-1.8,-0.4){$x_0-\delta$}
-\end{picture}
+%\setlength{\unitlength}{1cm}
+%\begin{picture}(4,4)(-1.5,-0.5)
+%\put (-0.5,-0.4){$(x_0,y_0)$}% draw the original point label
+%\put (-2.5,0){\vector(1,0){5.0}}% draw x axe
+%\put (2.75,-0.05){$x$}
+%\put (0,0){\vector(0,1){3.2}} %draw y axe
+%\put (0,3.35){$y$}
+%\qbezier(0,0)(-1.25,0)(-2.5,2.8)% draw graph
+%\qbezier(0,0)(1.25,0)(2.5,2.8)
+%\put (-1.2,1.5){$u(x,y)>u(x_0,y_0)$}
+%\put (2,0.6){$u(x,y)<u(x_0,y_0)$}
+%\put (2,3){$u(x,y)=u(x_0,y_0)$}
+%\put (2.1,1.5){$\frac{\partial u}{\partial y}(x_0,y_0)>0$}
+%\put (2.8,2.8){\vector(-1,0){0.3}}
+%\put (0,0){\vector(1,1){1}}
+%\put (0,0){\vector(-1,1){1}}
+%\multiput (1,1)(0,-0.1){10}{\line(0,-1){0.05}}
+%\multiput (-1,1)(0,-0.1){10}{\line(0,-1){0.05}}
+%\put (0.9,-0.4){$x_0+\delta$}
+%\put (-1.8,-0.4){$x_0-\delta$}
+%\end{picture}
+\begin{tikzpicture}
+\coordinate (org) at (0,0);
+\coordinate (xmin) at (-2.5,0);
+\coordinate (xmax) at (2.5,0);
+\coordinate (ymax) at (0,3.2);
+
+\draw[-latex] (xmin)--(xmax);
+\draw[-latex] (org)--(ymax);
+\draw (org) parabola (2.5,2.8);
+\draw (org) parabola (-2.5,2.8);
+\draw[-latex] (org)--(1,1);
+\draw[-latex] (org)--(-1,1);
+
+\draw[dashed] (1,0)--(1,1) (-1,0)--(-1,1);
+\draw (3.3,1.5) node {$\frac{\partial u}{\partial y}(x_0,y_0)>0$}
+	(0,1.5) node {$u(x,y)>u(x_0,y_0)$}
+	(3.2,0.6) node {$u(x,y)<u(x_0,y_0)$}
+	(3.2,3.3) node {$u(x,y)=u(x_0,y_0)$};
+\draw[-latex] (3,3)--(2.5,2.8);
+
+\draw (org) node [below] {$(x_0,y_0)$}
+	(xmax) node [right] {$x$}
+	(ymax) node [above] {$y$}
+	(0.5,0) node [below right] {$(x_0+\delta)$}
+	(-0.5,0) node [below left] {$(x_0-\delta)$};
+	
+\draw (-1,0) circle (1pt) (0,0) circle (1pt) (1,0) circle (1pt);
+\end{tikzpicture}
 \caption{Local scenario of bivariate function at maximum point of its slice.}
 \label{fig:local_bivariate}
 \end{figure}
