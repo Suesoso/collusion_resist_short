@@ -1,5 +1,5 @@
 \documentclass[conference]{IEEEtran}
-
+\usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -107,6 +107,8 @@ Section \ref{sec:sim} gives the simulation results and Section \ref{sec:rw} summ
 \label{sec:TP}
 This section describes the technical preliminaries including the basics of crowdsensing game, the concept of equilibrium in game theory, and the idea of profit trading. We also give some useful local properties of bivariate functions in the appendix. Table \ref{tab:symbol_list} presents the frequently used symbols in this paper.\footnotetext[1]{Similarly, by removing subscripts, $t$ denotes the sensing time profile, $p$ denotes the payment profile, $u$ denotes the user utility profile, $n$ denotes the profile of number of tasks, etc.}
 \begin{table}[!t]
+\caption{Frequently used notations}
+\label{tab:symbol_list}
 \begin{tabular}{l l}
 \toprule
 Notation & Description\\
@@ -131,8 +133,6 @@ $R$ & the number of remaining sensing tasks to do\\
 \bottomrule
 \smallskip
 \end{tabular}
-\caption{Frequently used notations}
-\label{tab:symbol_list}
 \end{table}
 \addtocounter{footnote}{1}
 
@@ -901,9 +901,7 @@ Collusion attack on collaborative systems is also an important issue for researc
 
 \section{Conclusions}
 \label{sec:con}
-{\color{black}
-This paper has systematically researched collusion attacks, including profit trading, in crowdsensing incentive mechanism. We have investigated the criteria that a truthful crowdsensing incentive mechanism can achieve group strategyproofness (eliminating collusion) or even n-truthfulness (eradicating profit trading). We have also proposed our crowdsensing incentive mechanism, which can resist any collusion attacks, even including profit trading. To verify our results, we have rigorously done the proofs that our solution can achieve the goals as stated above, and we have also given extensive simulations and presented all the supporting experimental results.
-}
+This paper has systematically researched collusion attacks, including profit trading, in crowdsensing incentive mechanism. We have investigated the criteria that a truthful crowdsensing incentive mechanism can achieve group strategyproofness (eliminating collusion) or even n-truthfulness (eradicating profit trading). We have also proposed our incentive mechanism for discrete crowdsensing. {\color{blue}Considering all the possible combinations of collusion attack, even including profit trading, we have rigorously shown that our discrete mechanism can resist collusion attacks in any form.} To verify our results, we have rigorously done the proofs that our solution can achieve the goals as stated above, and we have also given extensive simulations and presented all the supporting experimental results.
 
 \bibliographystyle{./IEEEtran}
 \bibliography{./13fall_1ed}
