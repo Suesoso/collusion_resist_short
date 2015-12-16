@@ -2,7 +2,7 @@ set term postscript eps size 3.5,2.62 font 'Times, 20
 set output 'img_running_time.eps'
 
 set xlabel 'Number of participating users'
-set ylabel 'Running time'
+set ylabel 'Running time (ms)'
 
 set xrange [0:1100]
 set key left top

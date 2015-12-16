@@ -833,18 +833,18 @@ Theorem \ref{thm:main} guarantees that to complete this proof, it suffices to sh
 \label{sec:sim}
 We have rigorously shown that our incentive mechanism can resist any collusion attacks, even with profit trading. In this section, we use experimental results to evaluate the performance of our mechanism. We consider the following aspects when evaluating: 
 \begin{itemize}
-\item \emph{Running time}, which is the average responding time to answer one user's application. After receiving any user $i$'s strategy $s_i$, we expect the platform will give the response $(n_i,p_i)$ as soon as possible.
+\item \emph{Running time}, which is the total time to compute the $(n_i,p_i)$ profile. After receiving each user $i$'s strategy $s_i$, we expect the platform will give the response $(n_i,p_i)$ as soon as possible.
 \item \emph{Utilization of the budget}, which is the ratio between the payment sum and the budget $B$. Let $\rho$ be the utilization ratio. Then we have
 \begin{equation}
 \label{eqn:ur}
 \rho = \frac{\sum_{i\in U}p_i}{B}.
 \end{equation}
-\item \emph{Completion of the sensing tasks}, which is the ratio between the number of finished tasks and the total sum of all the tasks. This ratio should be positively related to the budget $B$ as incentives.
+\item \emph{Completion of the sensing tasks}, which is the ratio between the number of finished tasks and the total sum of all the tasks. This ratio should be positively related to the budget $B$, which gives the incentives.
 \end{itemize}
 For each item we consider two variables: the number of participating users and the budget.
 
 \subsection{Experiment Setup}
-We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal} using Python 2.7. We ran the programs on 4-core Intel Xeon Processors with 16GB RAM, and SMP Linux with kernel version 3.19.8. Each measurement takes 1000 test samples.
+We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal} using Python 2.7. We ran the programs on 4-core Intel Xeon Processors with 16GB RAM, and SMP Linux with kernel version 3.19.8. Each measurement takes 1000 test samples. By default, we have 100 users, 10000 monetary units of budget and 1000 sensing tasks to do.
 
 \subsection{Results}
 
@@ -869,6 +869,9 @@ We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal}
 \end{minipage}
 \end{figure*}
 
+\emph{Running time}. We first consider the running time of our incentive mechanism with different sizes of participating users. We also compare our results with Koutsopoulos's strategyproof mechanism \cite{koutsopoulos2013optimal}, which admits parametric dependencies between the users. That is, to compute each $(n_i,p_i)$, in addition to user $i$'s input $s_i$, the platform needs inputs from some other users. In our experiment, we assume each user is parametric dependent to some central users, which occupy 1\% of all the users. Figure \ref{fig:running_time_n} gives the running time results. For all cases our mechanism is faster than Koutsopoulos's, since our mechanism disallows any parametric dependency. Thus when computing one $(n_i,p_i)$, we do not need to consider more users other than $i$. This can be verifies by the diverging trend between the two curves as the size of users grows.
+
+We next consider the running time of our mechanism with different budgets. Figure \ref{fig:running_time_R} gives the results. Our mechanism takes only 0.31 ms to finish all the computation, and is generally faster than Koutsopoulos's. Our mechanism has steady performance regarding different budgets.
 
 \begin{figure*}[!t]
 \centering
