@@ -2,7 +2,7 @@ set term postscript eps size 3.5,2.62 font 'Times, 20
 set output 'img_running_time_R.eps'
 
 set xlabel 'Budget'
-set ylabel 'Running time'
+set ylabel 'Running time (ms)'
 
 set xrange [0:11000]
 set key left top
