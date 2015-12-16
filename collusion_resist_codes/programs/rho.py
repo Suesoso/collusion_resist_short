@@ -13,7 +13,7 @@ rt = 1000
 # the maximum payment to each user is 100.
 Pm = 100
 # Total budget of the platform is 10000.
-R = 1000
+R = 10000
 # Platform utility
 u_p = R
 # The outputs will be stored in the text file loss_truthful_dis.txt
