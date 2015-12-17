@@ -42,7 +42,7 @@
 %With the rise of smartphones, crowdsensing applications have tremendously increasing trending. As a result, many incentive and privacy issues are worth researching. This paper gives detailed discussions on collusion resistant incentive mechanisms for crowdsensing applications. We analyze the continuous crowdsensing game in which users take sensing time to finish tasks and get payment. Two fundamental criteria are found: one is to judge whether a truthful incentive mechanism can resist any collusion without profit trading by achieving group strategyproof equilibrium, and the other is to judge whether a truthful mechanism can defend against any collusion even with profit trading by achieving n-truthful equilibrium. We also propose a concrete solution that not only satisfies both the criteria, but also maximizes the platform utility. However, sometimes users can only finish the sensing in discretized units and thus the continuous sensing time assumption may not hold any more. To address this discrete scenario, we give detailed analysis and propose a heuristic incentive solution that not only resists any collusion attack, but also preserves differential privacy of the participatory users. Extensive simulations verify our results. To the best of our knowledge, we are the first to investigate the collusion resistant incentive mechanisms for crowdsensing applications.
 
 With the rise of smartphones, crowdsensing applications have tremendously increasing trending. As a result, many incentive issues are worth researching. In this paper, we give detailed discussions on collusion resistant incentive mechanisms for crowdsensing applications. Two fundamental criteria are found: one is to judge whether a truthful incentive mechanism can resist any collusion without profit trading by achieving group strategyproof equilibrium, and the other is to judge whether a truthful mechanism can defend against any collusion even with 
-profit trading by achieving t-truthful equilibrium. Furthermore, we also propose our solution which can resist any form of collusion attack, even including profit trading among the attackers. Extensive simulations verify our results. To the best of our knowledge, we are the first to investigate the collusion resistant incentive mechanisms for crowdsensing applications.
+profit trading by achieving t-truthful equilibrium. Furthermore, we also propose our solution which can resist any form of collusion attack, even including profit trading among the attackers. {\color{blue}Extensive simulations verify that our mechanism has acceptable performance}. To the best of our knowledge, we are the first to investigate the collusion resistant incentive mechanisms for crowdsensing applications.
 \end{abstract}
 }
 
@@ -97,7 +97,7 @@ However, we can show that our incentive mechanism can achieve group strategyproo
 The remainder of this paper is organized as follows. Section \ref{sec:TP} gives the necessary technical preliminaries including equilibria, collusion attack and profit trading. Section \ref{sec:PFSM} discusses the basic settings of the crowdsensing game model. Section \ref{sec:GSIM} gives the criteria whether a truthful crowdsensing incentive mechanism can be group strategyproof. Section \ref{sec:DFPT} gives the criteria whether a truthful mechanism can be t-truthful. 
 In Section \ref{sec:discrete} we propose the discrete collusion resistant incentive mechanism which can achieve both group strategyproofness and t-truthfulness. 
 %In Section \ref{sec:pr} we propose our discrete crowdsensing incentive mechanism, which not only can defend against collusion attacks, even including profit trading, but also can well preserve users' identity privacy. 
-Section \ref{sec:sim} gives the simulation results and Section \ref{sec:rw} summarizes the related literatures. Section \ref{sec:con} concludes this paper.
+Section \ref{sec:sim} gives the experimental results, which evaluate the performance of our algorithms, and Section \ref{sec:rw} summarizes the related literatures. Section \ref{sec:con} concludes this paper.
 }
 
 %The remainder of this paper is organized as follows. Section \ref{sec:TP} gives the necessary technical preliminaries including equilibria, collusion attack, profit trading and differential privacy. Section \ref{sec:PFSM} discusses the basic settings of the crowdsensing game model. Section \ref{sec:GSIM} gives the criteria whether a truthful crowdsensing incentive mechanism can be group strategyproof. Section \ref{sec:DFPT} gives the criteria whether a truthful mechanism can be n-truthful. Section \ref{sec:opu} proposes our concrete continuous collusion resistant incentive mechanism that can also maximize the platform utility. In Section \ref{sec:discrete} we propose the discrete collusion resistant incentive mechanism, and then give discussions on the incentive and privacy issues on the discrete crowdsensing game. We also propose our heuristic solutions to eliminate some singular privacy leakage cases. Section \ref{sec:sim} gives the simulation results and Section \ref{sec:rw} summarizes the related literatures. Section \ref{sec:con} concludes this paper.
@@ -661,13 +661,13 @@ We now show that Algorithm \ref{alg:np} can not only resist collusion attacks (b
 
 \begin{lemma}
 \label{lem:quadratic}
-The nonnegative integer $n_i$ that maximizes the user utility $u_i = p_i - \kappa_in_i$ is $\max_{i\in U} \{m-\lfloor \kappa_i/d \rfloor, 0\}$.
+The non-negative integer $n_i$ that maximizes the user utility $u_i = p_i - \kappa_in_i$ is $\max_{i\in U} \{m-\lfloor \kappa_i/d \rfloor, 0\}$.
 {\color{blue} That is, if any $n_i = \max_{i\in U} \{m-\lfloor \kappa_i/d \rfloor, 0\}$, then the discrete crowdsensing game achieves strategyproof equilibrium. }
 \end{lemma}
 \begin{IEEEproof}
 In fact the utility may be real-extended into a concave quadratic function as follows:
 \[ u_i(n_i) = p_i - \kappa_in_i = \frac{1}{2}n_i(2m+1-n_i)d - \kappa_in_i. \]
-Its function graph is a parabola with the axis of symmetry $\hat{x}=m-\frac{\kappa_i}{d}+\frac{1}{2}$. It is easy to verify that the integer closest to the axis of symmetry can obtain the maximum utility. Figure \ref{fig:quad_prop} gives the two possible cases of the axis position. For both cases $m-\lfloor \kappa_i/d \rfloor$ is the integer closest to the symmetric axis. It is possible that the axis satisfies both the cases. Then it has two nearest integers and we can choose either of them. If the closest integer is nonnegative, we get the desired $n_i$ immediately. If the closest integer is negative, then the axis of symmetry must reside to the left of the $y$ axis. Hence the utility function monotonically decreases over $[0,+\infty)$. As a result the nonnegative integer $n_i$ that maximizes $u_i$ must be 0. Both cases give the lemma.
+Its function graph is a parabola with the axis of symmetry $\hat{x}=m-\frac{\kappa_i}{d}+\frac{1}{2}$. It is easy to verify that the integer closest to the axis of symmetry can obtain the maximum utility. Figure \ref{fig:quad_prop} gives the two possible cases of the axis position. For both cases $m-\lfloor \kappa_i/d \rfloor$ is the integer closest to the symmetric axis. It is possible that the axis satisfies both the cases. Then it has two nearest integers and we can choose either of them. If the closest integer is non-negative, we get the desired $n_i$ immediately. If the closest integer is negative, then the axis of symmetry must reside to the left of the $y$ axis. Hence the utility function monotonically decreases over $[0,+\infty)$. As a result the non-negative integer $n_i$ that maximizes $u_i$ must be 0. Both cases give the lemma.
 \end{IEEEproof}
 
 Now we can show our main results, Theorem \ref{thm:discrete}.
@@ -829,7 +829,12 @@ Theorem \ref{thm:main} guarantees that to complete this proof, it suffices to sh
 %{\color{black}Even though our proposed mechanism in this section can resist any collusion and well preserve identity privacy, it assumes public known PDFs of cost units. If such PDFs are not available, or the crowdsensing does not require privacy preservation, then we may try some other partition intervals. Clearly the resulted mechanism can still resist any collusion attack.%use our solution in Section \ref{sec:discrete}.
 %}
 
+<<<<<<< HEAD
 \section{Simulations}
+=======
+{\color{blue}
+\section{Evaluations}
+>>>>>>> b3cb0eb... First edit on the new evaluation part.
 \label{sec:sim}
 <<<<<<< HEAD
 This section will show our simulations that support the theoretic results we have obtained in the previous sections. Our crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. 
@@ -880,9 +885,11 @@ We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal}
 \end{minipage}
 \end{figure*}
 
-\emph{Running time}. We first consider the running time of our incentive mechanism with different sizes of participating users. We also compare our results with Koutsopoulos's strategyproof mechanism \cite{koutsopoulos2013optimal}, which admits parametric dependencies between the users. That is, to compute each $(n_i,p_i)$, in addition to user $i$'s input $s_i$, the platform needs inputs from some other users. In our experiment, we assume each user is parametric dependent to some central users, which occupy 1\% of all the users. Figure \ref{fig:running_time_n} gives the running time results. For all cases our mechanism is faster than Koutsopoulos's, since our mechanism disallows any parametric dependency. Thus when computing one $(n_i,p_i)$, we do not need to consider more users other than $i$. This can be verifies by the diverging trend between the two curves as the size of users grows.
+{\bf Running time}. We first consider the running time of our incentive mechanism with different sizes of participating users. We also compare our results with Koutsopoulos's strategyproof mechanism \cite{koutsopoulos2013optimal}, which admits parametric dependencies between the users. That is, to compute each $(n_i,p_i)$, in addition to user $i$'s input $s_i$, the platform needs inputs from some other users. In our experiment, we assume each user is parametric dependent to some central users, which occupy 1\% of all the users. Figure \ref{fig:running_time_n} gives the running time results. For all cases our mechanism is faster than Koutsopoulos's, since our mechanism disallows any parametric dependency. Thus when computing one $(n_i,p_i)$, we do not need to consider more users other than $i$. This can be verifies by the diverging trend between the two curves as the size of users grows.
 
 We next consider the running time of our mechanism with different budgets. Figure \ref{fig:running_time_R} gives the results. Our mechanism takes only 0.31 ms to finish all the computation, and is generally faster than Koutsopoulos's. Our mechanism has steady performance regarding different budgets.
+
+{\bf Budget utilization}. We first consider the budget utilization ratio of our mechanism with different sizes of users. Figure \ref{fig:rho_n} gives the results. The budget utilization ratio decreases as the size of users grows, since the maximum payment $P_m$ will decrease given more participating users ($nP_m$ is bounded by the budget $B$). In our mechanism, usually the budget utilization ratio is less than 16\%, which is budget-feasible. Repeating our mechanism may amplify the ratio. Since there are abundant budget, we can repeat the games many times.
 
 \begin{figure*}[!t]
 \centering
@@ -905,6 +912,13 @@ We next consider the running time of our mechanism with different budgets. Figur
 \end{minipage}
 \end{figure*}
 
+We next consider the budget utilization ratio of our mechanism with different budgets. Figure \ref{fig:rho_R} gives the results. Since budget is the most major incentive in our game, more budget allows more user participation. As a result, more payment will be sent to users, and hence the budget utilization increases.
+
+{\bf Completion of sensing tasks}. We first consider the ratio of finished sensing tasks of our mechanism with different sizes of users. Figure \ref{fig:rtask_n} gives the results. Generally the completion ratio is above 90\% and is steady for different user sizes. The completion ratio can be slightly lowered given more users, since there exist some users who are willing to do a lot of tasks, which exceed the amount of remaining tasks. These users cannot be negotiable since they aim to pursue the maximized user utilities and cannot allow any utility loss. 
+
+We next consider the ratio of completion with different budgets. Again, since budget is the major incentive in our game, more budget may better stimulate the users. Hence in Figure \ref{fig:rtask_R}, the completion ratio is highly positively related to the growth of budget.
+
+}
 %This section will show our simulations that support the theoretic results we have obtained in the previous sections. Our crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. 
 %%Furthermore, our discrete model can achieve 0-differential privacy, which has been rigorously proved. 
 %To verify all the collusion resistance results, we have designed five simulations. To verify the group strategyproof and n-truthful facts, we consider two variables: the size of the collusion (How many colluded users are there in the network?), and the perturbation size of colluded users' strategies (In collusion, how large the range of each colluded user's strategy can be?). For group strategyproofness, we focus on the average ratio between the number of the colluded users that are willing to quit collusion since the collusion can decrease their own utilities, and the number of all the colluded users. For n-truthfulness, we calculate the average utility loss of each colluded user, since the larger the colluded user's utility loss is, the less possible profit trading can happen. Under both cases above we also pay attention to the variations of the platform utility. %To verify the 0-differential private fact, we focus on the smallest sets among $P_k$ and $T_k$, since small $P_k$ or $T_k$ may give the attacker high probability to decipher the user identity correctly.
@@ -1045,7 +1059,7 @@ Collusion attack on collaborative systems is also an important issue for researc
 
 \section{Conclusions}
 \label{sec:con}
-This paper has systematically researched collusion attacks, including profit trading, in crowdsensing incentive mechanism. We have investigated the criteria that a truthful crowdsensing incentive mechanism can achieve group strategyproofness (eliminating collusion) or even n-truthfulness (eradicating profit trading). We have also proposed our incentive mechanism for discrete crowdsensing. {\color{blue}Considering all the possible combinations of collusion attack, even including profit trading, we have rigorously shown that our discrete mechanism can resist collusion attacks in any form.} To verify our results, we have rigorously done the proofs that our solution can achieve the goals as stated above, and we have also given extensive simulations and presented all the supporting experimental results.
+This paper has systematically researched collusion attacks, including profit trading, in crowdsensing incentive mechanism. We have investigated the criteria that a truthful crowdsensing incentive mechanism can achieve group strategyproofness (eliminating collusion) or even n-truthfulness (eradicating profit trading). We have also proposed our incentive mechanism for discrete crowdsensing. {\color{blue}Considering all the possible combinations of collusion attack, even including profit trading, we have rigorously shown that our discrete mechanism can resist collusion attacks in any form.} To verify our results, we have rigorously done the proofs that our solution can achieve the goals as stated above, and we have also presented all the experimental results, {\color{blue}which evaluate the performance of our mechanism.}
 
 \bibliographystyle{./IEEEtran}
 \bibliography{./13fall_1ed}
