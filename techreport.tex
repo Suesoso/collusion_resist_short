@@ -830,6 +830,7 @@ Theorem \ref{thm:main} guarantees that to complete this proof, it suffices to sh
 %}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 \section{Simulations}
 =======
 {\color{blue}
@@ -840,11 +841,27 @@ Theorem \ref{thm:main} guarantees that to complete this proof, it suffices to sh
 This section will show our simulations that support the theoretic results we have obtained in the previous sections. Our crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. 
 %Furthermore, our discrete model can achieve 0-differential privacy, which has been rigorously proved. 
 To verify all the collusion resistance results, we have designed five simulations. To verify the group strategyproof and n-truthful facts, we consider two variables: the size of the collusion (How many colluded users are there in the network?), and the perturbation size of colluded users' strategies (In collusion, how large the range of each colluded user's strategy can be?). For group strategyproofness, we focus on the average ratio between the number of the colluded users that are willing to quit collusion since the collusion can decrease their own utilities, and the number of all the colluded users. For n-truthfulness, we calculate the average utility loss of each colluded user, since the larger the colluded user's utility loss is, the less possible profit trading can happen. Under both cases above we also pay attention to the variations of the platform utility. %To verify the 0-differential private fact, we focus on the smallest sets among $P_k$ and $T_k$, since small $P_k$ or $T_k$ may give the attacker high probability to decipher the user identity correctly.
+=======
+{\color{blue}
+\section{Evaluations}
+\label{sec:sim}
+We have rigorously shown that our incentive mechanism can resist any collusion attacks, even with profit trading. In this section, we use experimental results to evaluate the performance of our mechanism. We consider the following aspects when evaluating: 
+\begin{itemize}
+\item \emph{Running time}, which is the total time to compute the $(n_i,p_i)$ profile. After receiving each user $i$'s strategy $s_i$, we expect the platform will give the response $(n_i,p_i)$ as soon as possible.
+\item \emph{Utilization of the budget}, which is the ratio between the payment sum and the budget $B$. Let $\rho$ be the utilization ratio. Then we have
+\begin{equation}
+\label{eqn:ur}
+\rho = \frac{\sum_{i\in U}p_i}{B}.
+\end{equation}
+\item \emph{Completion of the sensing tasks}, which is the ratio between the number of finished tasks and the total sum of all the tasks. This ratio should be positively related to the budget $B$, which gives the incentives.
+\end{itemize}
+For each item we consider two variables: the number of participating users and the budget.
+>>>>>>> b3cb0eb5c16d62ab4f675af33ffe9e99a61d8f07
 
-\subsection{Default Parameters and Settings}
-Before we give the detailed simulation results, let us see some default settings of our simulations. There are 100 participating users. Each user reports a claimed cost unit as its strategy, and the platform returns the required number of sensing tasks and the promised payments based on all the user strategies. We assume the maximum cost unit $\kappa_{max}$ is 10.0. %The baseline crowdsensing gain $R$ of the platform is 100. 
-Any coefficient $\lambda_i$ for user $i$ is no more than 20.0. To generate the cost units randomly, we always assume they are uniformly distributed within the interval $[0.01,\kappa_{max}]$. In our simulation we assume 0.01 is the least cost unit one user can have. We assume each colluded user randomly strategizes within the perturbation interval, whose radius is the user's perturbation size. Formally, for $\kappa_i$, if the perturbation size is $\theta$, then the perturbation interval is $[\max\{\kappa_i-\theta,0.01\},\kappa_i+\theta]$. Given the perturbation interval, in order to earn more payment, each colluded user prefers to make its strategy as low as possible, since lower strategy usually means higher participation level and thus more payment from the platform. For example, a colluded user $i$'s cost unit is 1.0, and the perturbation size is 2.0. Then this user $i$ has probability of 25\% to claim $s_i=0.01$, and 75\% to claim a strategy larger than 0.01. Defaultly we assume half of the users are colluding. The perturbation size is 5.0. The maximum payment to each user is 100. Each measurement takes 1000 test samples. One may see \cite{mycodes} for the source code of our simulations.
+\subsection{Experiment Setup}
+We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal} using Python 2.7. We ran the programs on 4-core Intel Xeon Processors with 16GB RAM, and SMP Linux with kernel version 3.19.8. Each measurement takes 1000 test samples. By default, we have 100 users, 10000 monetary units of budget and 1000 sensing tasks to do.
 
+<<<<<<< HEAD
 %\subsection{Continuous Model Evaluations}
 =======
 We have rigorously shown that our incentive mechanism can resist any collusion attacks, even with profit trading. In this section, we use experimental results to evaluate the performance of our mechanism. We consider the following aspects when evaluating: 
@@ -986,70 +1003,166 @@ We next consider the ratio of completion with different budgets. Again, since bu
 %\end{figure*}
 %
 %A losing user is a colluded user who suffers utility loss when colluding. A perturbation $\varepsilon$ on user $i$'s truthful strategy $s_i = \kappa_i$ results in an untruthful strategy $s'_i = \kappa_i + \varepsilon$. Figure \ref{fig:gs_ratio_con} gives the fact that the ratio of losing users remains around 80\% for different numbers of colluded users. Its variation becomes more stable given more colluded users. Hence for any collusion, most colluded users may complain and quit. Figure \ref{fig:gs_perturb_con} shows that the ratio of losing users increases given more strategy perturbation. For any perturbation size larger than 1.0, more than 80\% colluded users may complaint about utility loss and thus quit the crowdsensing. This result verifies that if any user tries some strategies more deviant from the truthful costs, usually it will end in a larger utility loss. Thus Figure \ref{fig:gs_ratio_con} and Figure \ref{fig:gs_perturb_con} verify the results of group strategyproofness. Figure \ref{fig:tr_ratio_con} and Figure \ref{fig:tr_perturb_con} give the similar results on the average utility loss of the colluded users. That is, for different collusion sizes, each colluded user may suffer average utility loss of about 20. Average utility loss grows rapidly as the perturbation size increases. They verify that our continuous model achieves n-truthfulness.
+=======
+\subsection{Results}
+>>>>>>> b3cb0eb5c16d62ab4f675af33ffe9e99a61d8f07
 
 \begin{figure*}[!t]
 \centering
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_ratio_dis.eps}
-\caption{Ratios of losing colluded users for different collusion sizes.}
-\label{fig:gs_ratio_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_running_time.eps}
+\caption{Running time with different sizes of participating users.}
+\label{fig:running_time_n}
 \end{minipage}
 \hspace{0.01cm}
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_perturb_dis.eps}
-\caption{Ratios of losing colluded users for different strategy perturbation sizes.}
-\label{fig:gs_perturb_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_running_time_R.eps}
+\caption{Running time with different budgets.}
+\label{fig:running_time_R}
 \end{minipage}
 \hspace{0.01cm}
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_loss_dis.eps}
-\caption{Average loss on user utility for different collusion sizes.}
-\label{fig:tr_ratio_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rho.eps}
+\caption{Budget utilization ratio with different sizes of users.}
+\label{fig:rho_n}
 \end{minipage}
 \end{figure*}
 
-\subsection{\color{black}Evaluation Results}
-Based on Figure \ref{fig:gs_ratio_dis}, most colluded users (around 60\%) may complain the loss of their user utilities when in collusion. %The ratio is less than that of the continuous model (about 80\%), since some changed strategies are still bounded by the same partition, and as a result, they will result in the identical assigned task number and payment from the platform. 
-Figure \ref{fig:gs_perturb_dis} shows the losing ratio increases given more perturbation size. For any perturbation size larger than 2.0, more than half of the colluded users will lose. By a similar reasoning, Figure \ref{fig:tr_ratio_dis} and Figure \ref{fig:tr_perturb_dis} show that any collusion may have negative impacts on the user utilities of the colluded users. For different collusion sizes, each colluded user may suffer average utility loss of more than 4. The perturbation size increasing by 1.0 will give utility loss of 1.0 to each colluded user averagely. Hence our simulation has verified that our {\color{black}incentive mechanism} is group strategyproof and n-truthful.
+{\bf Running time}. We first consider the running time of our incentive mechanism with different sizes of participating users. We also compare our results with Koutsopoulos's strategyproof mechanism \cite{koutsopoulos2013optimal}, which admits parametric dependencies between the users. That is, to compute each $(n_i,p_i)$, in addition to user $i$'s input $s_i$, the platform needs inputs from some other users. In our experiment, we assume each user is parametric dependent to some central users, which occupy 1\% of all the users. Figure \ref{fig:running_time_n} gives the running time results. For all cases our mechanism is faster than Koutsopoulos's, since our mechanism disallows any parametric dependency. Thus when computing one $(n_i,p_i)$, we do not need to consider more users other than $i$. This can be verifies by the diverging trend between the two curves as the size of users grows.
 
-We also consider the platform utility. %In the continuous model, the platform utility is always $R$ for all collusion scenarios (see Section \ref{sec:opu}). Differently, 
-Collusion has negative impacts on the platform utility. Figure \ref{fig:up_ratio_dis} shows that the platform utility suffers more loss given more colluded users. Figure \ref{fig:up_perturb_dis} reveals that the platform utility also suffers larger loss given more deviant perturbation on strategies. The underling reason is that each colluded user prefers to earn more payment by reporting low cost units. For example, if the collusion allows the user to report 0.01 or 2.00 as strategy, this user will prefer to report 0.01 rather than 2.00. As a result, when more users collude, or the perturbation size grows, the payment to each user can have more probability to increase rather than decrease. This will reduce the platform utility. On the other hand, collusion may give more variations on the platform utility. Thus by considering the utility, the platform expects to eliminate {\color{black}collusion among the users}.
+We next consider the running time of our mechanism with different budgets. Figure \ref{fig:running_time_R} gives the results. Our mechanism takes only 0.31 ms to finish all the computation, and is generally faster than Koutsopoulos's. Our mechanism has steady performance regarding different budgets.
+
+{\bf Budget utilization}. We first consider the budget utilization ratio of our mechanism with different sizes of users. Figure \ref{fig:rho_n} gives the results. The budget utilization ratio decreases as the size of users grows, since the maximum payment $P_m$ will decrease given more participating users ($nP_m$ is bounded by the budget $B$). In our mechanism, usually the budget utilization ratio is less than 16\%, which is budget-feasible. Repeating our mechanism may amplify the ratio. Since there are abundant budget, we can repeat the games many times.
 
 \begin{figure*}[!t]
 \centering
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_perturb_dis.eps}
-\caption{Average loss on user utility for different strategy perturbation sizes.}
-\label{fig:tr_perturb_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rho_R.eps}
+\caption{Budget utilization ratio with different budgets.}
+\label{fig:rho_R}
 \end{minipage}
 \hspace{0.01cm}
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_up_ratio_dis.eps}
-\caption{Loss of platform utility for different collusion sizes.}
-\label{fig:up_ratio_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rtask_n.eps}
+\caption{Finished task ratio with different sizes of users.}
+\label{fig:rtask_n}
 \end{minipage}
 \hspace{0.01cm}
-\begin{minipage}{0.3\textwidth}
-\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_up_perturb_dis.eps}
-\caption{Loss of platform utility for different strategy perturbation sizes.}
-\label{fig:up_perturb_dis}
+\begin{minipage}{0.31\textwidth}
+\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_rtask.eps}
+\caption{Finished task ratio with different budgets.}
+\label{fig:rtask_R}
 \end{minipage}
-%\hspace{0.01cm}
-%\begin{minipage}{0.24\textwidth}
-%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tk.eps}
-%\caption{$\min |T_k|$ for different numbers of all users in the discrete model.}
-%\label{fig:tk}
-%\end{minipage}
-%\hspace{0.01cm}
-%\begin{minipage}{0.24\textwidth}
-%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_pk.eps}
-%\caption{$\min |P_k|$ for different numbers of all users in the discrete model.}
-%\label{fig:pk}
-%\end{minipage}
 \end{figure*}
 
-%\subsection{Differential Privacy Evaluations}
-%To ensure our differential privacy scheme can work, one expects large enough $\min |T_k|$ and $\min |P_k|$. Figure \ref{fig:tk} shows that each set $T_k$ has at least two users. In other words, there are always at least two users within any partition given by our algorithm. This is a direct consequence of merging partitions as proposed. Figure \ref{fig:pk} shows that for any partition, there are at least around one fourth of the total users whose cost unit range intervals intersect with this partition. Both facts can guarantee that any privacy leakage by too small $T_k$ and $P_k$ has very low possibility. For example, given 100 users, the least $P_k$ may have size of 25. The corresponding $|T_k|\geq 2$. Thus to identify all the users in $T_k$ takes probability less than $(1/25)^2 = 0.16\%$. Hence this fact ensures our mechanism can be 0-differentially private.
+We next consider the budget utilization ratio of our mechanism with different budgets. Figure \ref{fig:rho_R} gives the results. Since budget is the most major incentive in our game, more budget allows more user participation. As a result, more payment will be sent to users, and hence the budget utilization increases.
+
+{\bf Completion of sensing tasks}. We first consider the ratio of finished sensing tasks of our mechanism with different sizes of users. Figure \ref{fig:rtask_n} gives the results. Generally the completion ratio is above 90\% and is steady for different user sizes. The completion ratio can be slightly lowered given more users, since there exist some users who are willing to do a lot of tasks, which exceed the amount of remaining tasks. These users cannot be negotiable since they aim to pursue the maximized user utilities and cannot allow any utility loss. 
+
+We next consider the ratio of completion with different budgets. Again, since budget is the major incentive in our game, more budget may better stimulate the users. Hence in Figure \ref{fig:rtask_R}, the completion ratio is highly positively related to the growth of budget.
+
+}
+%This section will show our simulations that support the theoretic results we have obtained in the previous sections. Our crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. 
+%%Furthermore, our discrete model can achieve 0-differential privacy, which has been rigorously proved. 
+%To verify all the collusion resistance results, we have designed five simulations. To verify the group strategyproof and n-truthful facts, we consider two variables: the size of the collusion (How many colluded users are there in the network?), and the perturbation size of colluded users' strategies (In collusion, how large the range of each colluded user's strategy can be?). For group strategyproofness, we focus on the average ratio between the number of the colluded users that are willing to quit collusion since the collusion can decrease their own utilities, and the number of all the colluded users. For n-truthfulness, we calculate the average utility loss of each colluded user, since the larger the colluded user's utility loss is, the less possible profit trading can happen. Under both cases above we also pay attention to the variations of the platform utility. %To verify the 0-differential private fact, we focus on the smallest sets among $P_k$ and $T_k$, since small $P_k$ or $T_k$ may give the attacker high probability to decipher the user identity correctly.
+%
+%\subsection{Default Parameters and Settings}
+%Before we give the detailed simulation results, let us see some default settings of our simulations. There are 100 participating users. Each user reports a claimed cost unit as its strategy, and the platform returns the required number of sensing tasks and the promised payments based on all the user strategies. We assume the maximum cost unit $\kappa_{max}$ is 10.0. %The baseline crowdsensing gain $R$ of the platform is 100. 
+%Any coefficient $\lambda_i$ for user $i$ is no more than 20.0. To generate the cost units randomly, we always assume they are uniformly distributed within the interval $[0.01,\kappa_{max}]$. In our simulation we assume 0.01 is the least cost unit one user can have. We assume each colluded user randomly strategizes within the perturbation interval, whose radius is the user's perturbation size. Formally, for $\kappa_i$, if the perturbation size is $\theta$, then the perturbation interval is $[\max\{\kappa_i-\theta,0.01\},\kappa_i+\theta]$. Given the perturbation interval, in order to earn more payment, each colluded user prefers to make its strategy as low as possible, since lower strategy usually means higher participation level and thus more payment from the platform. For example, a colluded user $i$'s cost unit is 1.0, and the perturbation size is 2.0. Then this user $i$ has probability of 25\% to claim $s_i=0.01$, and 75\% to claim a strategy larger than 0.01. Defaultly we assume half of the users are colluding. The perturbation size is 5.0. The maximum payment to each user is 100. Each measurement takes 1000 test samples. One may see \cite{mycodes} for the source code of our simulations.
+%
+%%\subsection{Continuous Model Evaluations}
+%%\begin{figure*}[!t]
+%%\centering
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_ratio_con.eps}
+%%\caption{Ratios of losing colluded users for different collusion sizes in the continuous model.}
+%%\label{fig:gs_ratio_con}
+%%\end{minipage}
+%%\hspace{0.01cm}
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_perturb_con.eps}
+%%\caption{Ratios of losing colluded users for different strategy perturbation sizes in the continuous model.}
+%%\label{fig:gs_perturb_con}
+%%\end{minipage}
+%%\hspace{0.01cm}
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_loss_con.eps}
+%%\caption{Average loss on user utility for different collusion sizes in the continuous model.}
+%%\label{fig:tr_ratio_con}
+%%\end{minipage}
+%%\hspace{0.01cm}
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_perturb_con.eps}
+%%\caption{Average loss on user utility for different strategy perturbation sizes in the continuous model.}
+%%\label{fig:tr_perturb_con}
+%%\end{minipage}
+%%\end{figure*}
+%%
+%%A losing user is a colluded user who suffers utility loss when colluding. A perturbation $\varepsilon$ on user $i$'s truthful strategy $s_i = \kappa_i$ results in an untruthful strategy $s'_i = \kappa_i + \varepsilon$. Figure \ref{fig:gs_ratio_con} gives the fact that the ratio of losing users remains around 80\% for different numbers of colluded users. Its variation becomes more stable given more colluded users. Hence for any collusion, most colluded users may complain and quit. Figure \ref{fig:gs_perturb_con} shows that the ratio of losing users increases given more strategy perturbation. For any perturbation size larger than 1.0, more than 80\% colluded users may complaint about utility loss and thus quit the crowdsensing. This result verifies that if any user tries some strategies more deviant from the truthful costs, usually it will end in a larger utility loss. Thus Figure \ref{fig:gs_ratio_con} and Figure \ref{fig:gs_perturb_con} verify the results of group strategyproofness. Figure \ref{fig:tr_ratio_con} and Figure \ref{fig:tr_perturb_con} give the similar results on the average utility loss of the colluded users. That is, for different collusion sizes, each colluded user may suffer average utility loss of about 20. Average utility loss grows rapidly as the perturbation size increases. They verify that our continuous model achieves n-truthfulness.
+%
+%\begin{figure*}[!t]
+%\centering
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_ratio_dis.eps}
+%\caption{Ratios of losing colluded users for different collusion sizes.}
+%\label{fig:gs_ratio_dis}
+%\end{minipage}
+%\hspace{0.01cm}
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_gs_perturb_dis.eps}
+%\caption{Ratios of losing colluded users for different strategy perturbation sizes.}
+%\label{fig:gs_perturb_dis}
+%\end{minipage}
+%\hspace{0.01cm}
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_loss_dis.eps}
+%\caption{Average loss on user utility for different collusion sizes.}
+%\label{fig:tr_ratio_dis}
+%\end{minipage}
+%\end{figure*}
+%
+%\subsection{\color{black}Evaluation Results}
+%Based on Figure \ref{fig:gs_ratio_dis}, most colluded users (around 60\%) may complain the loss of their user utilities when in collusion. %The ratio is less than that of the continuous model (about 80\%), since some changed strategies are still bounded by the same partition, and as a result, they will result in the identical assigned task number and payment from the platform. 
+%Figure \ref{fig:gs_perturb_dis} shows the losing ratio increases given more perturbation size. For any perturbation size larger than 2.0, more than half of the colluded users will lose. By a similar reasoning, Figure \ref{fig:tr_ratio_dis} and Figure \ref{fig:tr_perturb_dis} show that any collusion may have negative impacts on the user utilities of the colluded users. For different collusion sizes, each colluded user may suffer average utility loss of more than 4. The perturbation size increasing by 1.0 will give utility loss of 1.0 to each colluded user averagely. Hence our simulation has verified that our {\color{black}incentive mechanism} is group strategyproof and n-truthful.
+%
+%We also consider the platform utility. %In the continuous model, the platform utility is always $R$ for all collusion scenarios (see Section \ref{sec:opu}). Differently, 
+%Collusion has negative impacts on the platform utility. Figure \ref{fig:up_ratio_dis} shows that the platform utility suffers more loss given more colluded users. Figure \ref{fig:up_perturb_dis} reveals that the platform utility also suffers larger loss given more deviant perturbation on strategies. The underling reason is that each colluded user prefers to earn more payment by reporting low cost units. For example, if the collusion allows the user to report 0.01 or 2.00 as strategy, this user will prefer to report 0.01 rather than 2.00. As a result, when more users collude, or the perturbation size grows, the payment to each user can have more probability to increase rather than decrease. This will reduce the platform utility. On the other hand, collusion may give more variations on the platform utility. Thus by considering the utility, the platform expects to eliminate {\color{black}collusion among the users}.
+%
+%\begin{figure*}[!t]
+%\centering
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tr_perturb_dis.eps}
+%\caption{Average loss on user utility for different strategy perturbation sizes.}
+%\label{fig:tr_perturb_dis}
+%\end{minipage}
+%\hspace{0.01cm}
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_up_ratio_dis.eps}
+%\caption{Loss of platform utility for different collusion sizes.}
+%\label{fig:up_ratio_dis}
+%\end{minipage}
+%\hspace{0.01cm}
+%\begin{minipage}{0.3\textwidth}
+%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_up_perturb_dis.eps}
+%\caption{Loss of platform utility for different strategy perturbation sizes.}
+%\label{fig:up_perturb_dis}
+%\end{minipage}
+%%\hspace{0.01cm}
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_tk.eps}
+%%\caption{$\min |T_k|$ for different numbers of all users in the discrete model.}
+%%\label{fig:tk}
+%%\end{minipage}
+%%\hspace{0.01cm}
+%%\begin{minipage}{0.24\textwidth}
+%%\includegraphics[width=\textwidth]{collusion_resist_codes/images/img_pk.eps}
+%%\caption{$\min |P_k|$ for different numbers of all users in the discrete model.}
+%%\label{fig:pk}
+%%\end{minipage}
+%\end{figure*}
+%
+%%\subsection{Differential Privacy Evaluations}
+%%To ensure our differential privacy scheme can work, one expects large enough $\min |T_k|$ and $\min |P_k|$. Figure \ref{fig:tk} shows that each set $T_k$ has at least two users. In other words, there are always at least two users within any partition given by our algorithm. This is a direct consequence of merging partitions as proposed. Figure \ref{fig:pk} shows that for any partition, there are at least around one fourth of the total users whose cost unit range intervals intersect with this partition. Both facts can guarantee that any privacy leakage by too small $T_k$ and $P_k$ has very low possibility. For example, given 100 users, the least $P_k$ may have size of 25. The corresponding $|T_k|\geq 2$. Thus to identify all the users in $T_k$ takes probability less than $(1/25)^2 = 0.16\%$. Hence this fact ensures our mechanism can be 0-differentially private.
 
 \section{Related Works}
 \label{sec:rw}
