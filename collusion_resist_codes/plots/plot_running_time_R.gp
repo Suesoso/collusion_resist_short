@@ -1,4 +1,4 @@
-set term postscript eps size 3.5,2.62 font 'Times, 20
+set term postscript eps size 3.5,2.62 font 'Times, 22
 set output 'img_running_time_R.eps'
 
 set xlabel 'Budget'

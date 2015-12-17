@@ -1,7 +1,7 @@
-set term postscript eps size 3.5,2.62 font 'Times, 20
+set term postscript eps size 3.5,2.62 font 'Times, 22
 set output 'img_rho.eps'
 
-set xlabel 'Number of participating users'
+set xlabel 'Number of users'
 set ylabel 'Budget utilization ratio'
 
 set xrange [0:1100]
