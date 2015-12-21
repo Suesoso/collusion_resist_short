@@ -60,7 +60,7 @@ In real-world crowdsensing applications, a single entity may simultaneously own 
 %Many existing crowdsensing incentive mechanisms \cite{yang2012crowdsourcing,koutsopoulos2013optimal,zheng2014strategy} that assume individual rationality cannot .
 
 Collusion attack is an important but difficult problem to address in general \cite{zhong2007designing, wang2006low, jurca2007collusion}. 
-The difficulty lies in two aspects: \textbf{1)} A variety of collusion strategies (e.g., with or without profit trading) make the mitigation challenging. It means that in practice it requires security expertise to consider as many collusion scenarios as possible for a specific setting and provide technical solutions to mitigate the known collusion attacks. But like other penetration analysis, there is no guarantee of guard against unexamined cases. \textbf{2)} Difficulty exists when trying to provide theoretical guarantee of guard in the incentive mechanism design. 
+The difficulty lies in two aspects: \textbf{1)} A variety of collusion strategies (e.g., with or without profit trading) make the mitigation challenging. It means that in practice it requires security expertise to consider as many collusion scenarios as possible for a specific setting and provide technical solutions to mitigate the known collusion attacks. But like other penetration analysis, there is no guarantee of guard against unexamined cases. \textbf{2)} Difficulty exists when trying to provide theoretical guarantee of guard in the incentive mechanism design. {\color{blue}\textbf{3)} In practice it is difficult to make any assumption on the collusion size. Even though it is typical that the colluded users are much smaller than the entire user population, the upper bound of collusion size is not always available. } 
 As we mentioned earlier, since only strategyproofness cannot provide collusion resistance \cite{zhong2007designing}, people try to use other game theoretical solution concepts such as \emph{Group Strategyproof Equilibrium} \cite{jain1999group} to achieve collusion resistance. %So far  is one of the standard collusion resistant solutions that can give truthful mechanisms.
 However, within the scope of wireless networks, sometimes it is not possible at all to achieve any group strategyproof equilibrium in some games. For example, one can never achieve any group strategyproofness in theory for noncooperative routing games in wireless ad hoc networks \cite{zhong2007designing}. When it is possible that colluding nodes can trade profit among them, this problem becomes even harder. For the same routing problem, we cannot obtain any strategyproofness if the colluding users can trade profit among them \cite{wang2006low}.
 
@@ -273,6 +273,12 @@ In Section \ref{sec:PFSM} and Appendix \ref{sec:dsim}, we have given the closed-
 We leverage a graph model to analyze the strategyproof crowdsensing game. We give the theoretic criteria to judge whether a strategyproof mechanism can be group strategyproof.
 
 According to (\ref{eqn:payment}) and (\ref{eqn:utility_final}), we can uniquely determine the payment to each user $i$, if and only if we know the function form of the required sensing time $t_i(s_i)$. $t_i(s_i)$ must be a decreasing a.e. differentiable function such that the integral in (\ref{eqn:payment}) exists. For example, $t_i(s_i)$ may be $\mathrm{e}^{-s_i}$, which is parametric dependent (see Definition \ref{def:pd}) on none of any other user\rq{}s strategy. $t_i(s_i)$ can also be parametric dependent on other user\rq{}s strategy, such as $t_i(s_i)=s_j\mathrm{e}^{-s_i},(j\not=i)$. We leverage a directed graph to represent the parametric dependencies among the user strategies. That is Parametric Dependency Graph.
+{\color{blue}
+\begin{definition}
+\label{def:pd}
+\textbf{(Parametric Dependency)} The utility function $u_i(s_i,s_j)=p_i(s_i,s_j)-\kappa_it_i(s_i,s_j)$ is parametric dependent on $s_j$ if and only if $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s\not=0$ holds for any $s_i\in\mathbb{R}^+$.
+\end{definition}
+}
 \begin{definition}
 \label{def:PDG}
 \textbf{(Parametric Dependency Graph)} For any strategyproof crowdsensing game, denote by $G=(U,E)$ its parametric dependency graph, in which $U$ is the set of the participating users, and for any edge $(i,j)\in E$, user $i$\rq{}s utility function $u_i$ is parametric dependent on $s_j$.
@@ -324,7 +330,14 @@ Lemma \ref{lem:necessity} and Lemma \ref{lem:sufficiency} together give our main
 \label{thm:main}
 For any strategyproof crowdsensing game with user utility equation (\ref{eqn:user_utility_2}), its equilibrium is group strategyproof, if and only if its parametric dependency graph is acyclic.
 \end{theorem}
-Based on Theorem \ref{thm:main}, we need to define some partial order relations among the users in order to defend against collusion. The platform determines the partial orders solely and there is no need to let each user know all the orders. If the PDG is cyclic, even though the game cannot be group strategyproof, it is still possible to defend against collusion to some extent. For example, if the colluded users have no circles in the PDG, it is impossible to collude successfully. Let $C$ be the users in the smallest circle in the PDG. It follows that such strategyproof game can resist any collusion that has less than $|C|$ colluded users.
+{\color{blue}
+Based on Theorem \ref{thm:main}, we need to define an acyclic PDG among the users in order to defend against collusion (without profit trading). The platform determines the PDG solely and there is no need to let each user know the entire graph. 
+
+We temporarily assume there is no profit trading, which will be discussed later. If there is an upper bound of collusion size, then a PDG can resist any such collusion with a much weakened condition. Note that only the users in a circle of the PDG can successfully collude. Let $C$ be the users in one of the smallest circles in the PDG. If $|C|$ is larger than the upper bound of collusion size, then any subset of colluded users cannot contain any circle. Hence the PDG can resist any such collusion with the upper bound. We summerize the discussions as the following corollary.
+\begin{corollary}
+For any strategyproof crowdsensing game with user utility equation (\ref{eqn:user_utility_2}), if any possible collusion size is no more than $k$, then the game can resist any such collusion without profit trading if the size of the smallest circle in the PDG is larger than $k$.
+\end{corollary}
+}
 
 \section{Defense Against Profit Trading By n-Truthfulness}
 \label{sec:DFPT}
@@ -874,7 +887,7 @@ We implemented our mechanism and the algorithm in \cite{koutsopoulos2013optimal}
 
 We next consider the running time of our mechanism with different budgets. Figure \ref{fig:running_time_R} gives the results. Our mechanism takes only 0.31 ms to finish all the computation, and is generally faster than Koutsopoulos's. Our mechanism has steady performance regarding different budgets.
 
-{\bf Budget utilization}. We first consider the budget utilization ratio of our mechanism with different sizes of users. Figure \ref{fig:rho_n} gives the results. The budget utilization ratio decreases as the size of users grows, since the maximum payment $P_m$ will decrease given more participating users ($nP_m$ is bounded by the budget $B$). In our mechanism, usually the budget utilization ratio is less than 16\%, which is budget-feasible. Repeating our mechanism may amplify the ratio. Since there are abundant budget, we can repeat the games many times.
+{\bf Budget utilization}. We first consider the budget utilization ratio of our mechanism with different sizes of users. Figure \ref{fig:rho_n} gives the results. The budget utilization ratio decreases as the size of users grows, since the maximum payment $P_m$ will decrease given more participating users ($nP_m$ is bounded by the budget $B$). In our mechanism, usually the budget utilization ratio is less than 16\%, which is budget-feasible. Repeating our mechanism may amplify the ratio. Since there are abundant budget, we can repeat the game many times.
 
 \begin{figure*}[!t]
 \centering
@@ -1147,11 +1160,7 @@ For any other user strategy $s_j$, we have
 \label{eqn:p_ui_j}
 \frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)=\int_{\kappa_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s.
 \end{equation}
-We are not sure whether $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)=0$ based on (\ref{eqn:p_ui_j}). Since we have no knowledge of $\kappa_i$ when we design the closed-form of $t_i(s_i)$, in order to assume $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)\not=0$, we must guarantee $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s\not=0$ holds for any $s_i\in\mathbb{R}^+$.\footnote{Similarly, we must guarantee $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s=0$ holds for any $s_i\in\mathbb{R}^+$ to ensure $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)=0$, which is the opposite case of Definition \ref{def:pd}. That is, we avoid the case $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s=0$ holds partially over $\mathbb{R}^+$ when designing the function $t_i$ for this paper.} Insightfully, this reveals the \emph{dependency} between the function value $u_i(s_i,s_j)$ and the parameter $s_j$. That is, the strategy $s_j$ contributes significantly to the utility of user $i$. Thus, we introduce the concept of \emph{parametric dependency}.
-\begin{definition}
-\label{def:pd}
-\textbf{(Parametric Dependency)} The utility function $u_i(s_i,s_j)=p_i(s_i,s_j)-\kappa_it_i(s_i,s_j)$ is parametric dependent on $s_j$ if and only if $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s\not=0$ holds for any $s_i\in\mathbb{R}^+$.
-\end{definition}
+We are not sure whether $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)=0$ based on (\ref{eqn:p_ui_j}). Since we have no knowledge of $\kappa_i$ when we design the closed-form of $t_i(s_i)$, in order to assume $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)\not=0$, we must guarantee $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s\not=0$ holds for any $s_i\in\mathbb{R}^+$.\footnote{Similarly, we must guarantee $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s=0$ holds for any $s_i\in\mathbb{R}^+$ to ensure $\frac{\partial u_i}{\partial s_j}(\kappa_i,s_j)=0$, which is the opposite case of Definition \ref{def:pd}. That is, we avoid the case $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s=0$ holds partially over $\mathbb{R}^+$ when designing the function $t_i$ for this paper.} Insightfully, this reveals the \emph{dependency} between the function value $u_i(s_i,s_j)$ and the parameter $s_j$. That is, the strategy $s_j$ contributes significantly to the utility of user $i$. Thus, we introduce the concept of \emph{parametric dependency} (see Definition \ref{def:pd}. 
 For example, let $t_i(s_i,s_j)=s_j\mathrm{e}^{-s_i}$, and thus $\frac{\partial t_i}{\partial s_j}(s_i,s_j)=\mathrm{e}^{-s_i}>0$. Then we have $\int_{s_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s>0$ and thus $u_i(s_i,s_j)$ is parametric dependent on $s_j$. In fact, when $s_i=\kappa_i$, $\frac{\partial u}{\partial s_j}(\kappa_i,s_j)=\int_{\kappa_i}^{+\infty}\frac{\partial t_i}{\partial s_j}(s,s_j)\mathrm{d}s>0$. That is, the utility of user $i$ will increase as user $j$\rq{}s strategy increases around the maximum points. Similarly, it can derive that $u_i(s_i,s_j)$ is not parametric dependent on any $s_k$ such that $k\not=i,j$. If $u_i$ is not parametric dependent on $s_j$, $s_j$ has no impact on $u_i$, and thus user $i$ can maximize its utility by choosing truthful strategy, whatever $s_j$ is. This is because for any different strategies $s_j$ and $s'_j$, we have
 \begin{equation}
 \label{eqn:unpd}
