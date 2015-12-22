@@ -198,7 +198,7 @@ it is not strong enough to eliminate the possibility of profit trading. In order
 \begin{equation}
 \sum_{i\in S} u_i(s_S^*,s_{\overline{S}})\geq \sum_{i\in S} u_i(s_S,s_{\overline{S}}).
 \end{equation}
-Here $s^*=\kappa$, the real cost profile.
+Here $s^*=\kappa$, the real cost profile. {\color{blue}$s_S$ and $s_{\overline{S}}$ are the same as Definition \ref{def:gse}.}
 \end{definition}
 Here $t$ is the upper bound of collusion size that the mechanism can resist. It is obvious that by setting $t=N$, a mechanism that can achieve $N$-Truthfulness can always resist any profit trading collusion. 
 %In profit trading collusion, by changing strategy profile, the colluded users must ensure their total utilities can increase, even though some of them will suffer losses in their utilities temporarily. This implies profit trading collusion requires complete trust among the involved users.
@@ -334,7 +334,7 @@ For any strategyproof crowdsensing game with user utility equation (\ref{eqn:use
 {\color{blue}
 Based on Theorem \ref{thm:main}, we need to define an acyclic PDG among the users in order to defend against collusion (without profit trading). The platform determines the PDG solely and there is no need to let each user know the entire graph. 
 
-We temporarily assume there is no profit trading, which will be discussed later. If there is an upper bound of collusion size, then a PDG can resist any such collusion with a much weakened condition. Note that only the users in a circle of the PDG can successfully collude. Let $C$ be the users in one of the smallest circles in the PDG. If $|C|$ is larger than the upper bound of collusion size, then any subset of colluded users cannot contain any circle. Hence the PDG can resist any such collusion with the upper bound. We summerize the discussions as the following corollary.
+We temporarily assume there is no profit trading, which will be discussed later. If there is an upper bound of collusion size, then a PDG can resist any such collusion with a much weakened condition. Note that only the users in a circle of the PDG can successfully collude. Let $C$ be the users in one of the smallest circles in the PDG. If $|C|$ is larger than the upper bound of collusion size, then any subset of colluded users cannot contain any circle. Hence the PDG can resist any such collusion with the upper bound. We summarize the discussions as the following corollary.
 \begin{corollary}
 For any strategyproof crowdsensing game with user utility equation (\ref{eqn:user_utility_2}), if any possible collusion size is no more than $k$, then the game can resist any such collusion without profit trading if the size of the smallest circle in the PDG is larger than $k$.
 \end{corollary}
