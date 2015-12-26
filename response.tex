@@ -43,7 +43,7 @@ Previously the experiment design is not good, since to show the security propert
 
 \question In Page 1, the authors say “But like other penetration analysis, there is no guarantee of guard against unexamined cases”. However, in Page 9, they conclude that the proposed crowdsensing incentive mechanism can resist any collusion attack. So, if there exists an unexamined collusion attack except those ones in the paper, can the  crowdsensing incentive mechanism be against it?  which is not clear in the paper.
 \begin{solution}
-
+Since we have eliminate the possibility of any collusion attack even with profit trading in theory rigorously, it is safe to say that our mechanism can resist any collusion attack in any form. 
 We have added more discussions regarding this point in Section IX.
 \end{solution}
 
@@ -59,8 +59,15 @@ This problem has been fixed.
 
 \section{Reviewer 3}
 \question The limitation of this paper is that it only studies two specific types of crowdsensing systems, where the user's participation level is measured by sensing time and the number of sensing tasks respectively. There are also other crowdsensing systems, for example, users can also submit the set of crowdsensing tasks to perform with their cost.
+\begin{solution}
+Even though our models are not the unique solutions to crowdsensing game, they are quite general and typical. They capture the most important features of crowdsensing: payment and workload (sensing time of each user). The equation $u = p - \kappa t$ should reflect most crowdsensing games. If some users cannot participate due to certain restrictions, they can simply quit. All the participating users can give a game which is convenient to research. On the other hand, many restrictions such as different sets of tasks for different users are difficult to define. Thus in this paper we decide to focus on the most general and typical crowdsensing game model in existing works. 
+I have added more discussions about this point in Section III.A.
+\end{solution}
 
 \question For the first type of crowdsensing model, where the user's participation level is measured by sensing time, only a strategyproof, but not group strategyproof, incentive mechanism is described.
+\begin{solution}
+Our main result, Theorem 1, has given the condition which strategyproof game can also be group strategyproof. That is, the PDG must be acyclic. This is a quite general result, which can spawn many different constructions.
+\end{solution}
 
 \question Typos: 
 In Section I, ``For another group of typical crowdsensing game'', ``When the possibility that colluding nodes can trade profit among them''
