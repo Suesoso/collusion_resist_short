@@ -595,11 +595,12 @@ We will give more discussions on the underlying reasons of our algorithm in the 
 \label{fig:discrete_idea}
 \end{figure}
 
-{\color{black}
+
 \subsection{Proofs of Collusion and Profit Trading Resistance}
 We now show that Algorithm \ref{alg:np} can not only resist collusion attacks (by achieving group strategyproofness), but also eradicate the possibility of any profit trading (by achieving $N$-truthfulness). Parametric Dependency Graph (PDG) will be used to judge whether the strategyproof equilibrium can be group strategyproof or $N$-truthful.
 
-{\color{blue} Before we introduce our main results, we need Lemma \ref{lem:quadratic}, which gives the strategyproof equilibrium for the discrete crowdsensing game. }
+{\color{blue}Before we introduce our main results, we need Lemma \ref{lem:quadratic}, which gives the strategyproof equilibrium for the discrete crowdsensing game.}
+
 \begin{figure}[!t]
 \centering{}
 \setlength{\unitlength}{1cm}
@@ -669,7 +670,7 @@ We now show that Algorithm \ref{alg:np} can not only resist collusion attacks (b
 
 \draw (3,-0.5) node {(b)};% lengend
 \end{tikzpicture}
-\caption{\color{black}Two cases of the parabola symmetric axis. The dashed vertical lines denote $x=k\in\mathbb{Z}$, and each solid vertical line is the symmetric axis of the parabola. Each circled point is the integer closest to the axis.}
+\caption{Two cases of the parabola symmetric axis. The dashed vertical lines denote $x=k\in\mathbb{Z}$, and each solid vertical line is the symmetric axis of the parabola. Each circled point is the integer closest to the axis.}
 \label{fig:quad_prop}
 \end{figure}
 
@@ -693,7 +694,7 @@ For any discrete crowdsensing game with user utility equation $u_i = p_i - \kapp
 Clearly the utility of each user $i$ is not parametric dependent on any other user strategy. We may view $n_i$ as restricting the $t_i$ in (\ref{eqn:user_utility_2}) onto integers. %Then the statements in Theorem \ref{thm:main} and Theorem \ref{thm:pt} still hold for the case $u_i = p_i - \kappa_in_i$. 
 Theorem \ref{thm:main} guarantees that to complete this proof, it suffices to show that the incentive mechanism given by Algorithm \ref{alg:np} can achieve strategyproof equilibrium. For any user $i$, to maximize its utility $u_i = p_i - \kappa_in_i$, $n_i$ must be $\max_{i\in U}\{m-\lfloor \kappa_i/d \rfloor, 0\}$ by Lemma \ref{lem:quadratic}. In other words, there will be no gain if user $i$ makes its strategy $s_i$ different from the true cost unit $\kappa_i$. This fact implies the strategyproof equilibrium.
 \end{IEEEproof}
-}
+
 {\color{black}Note that there will be no gain or loss if user $i$ selects any other points within the ($m+1-n_i$)-th interval. Thus a small partition interval is beneficial to the truthful mechanism, since each user has less freedom to perturb the truthful strategy. }
 {\color{blue}Also our mechanism is budget feasible, since the payment sum is upper bounded by the budget B, i.e., $\sum_{p_i} < N \cdot P_m \leq B$.}
 

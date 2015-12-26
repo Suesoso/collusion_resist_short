@@ -1,0 +1,64 @@
+\documentclass[a4paper,11pt]{exam}
+\printanswers
+
+\usepackage{color}
+
+\renewcommand{\solutiontitle}{\noindent\textbf{Response:}\par\noindent}
+
+\begin{document}
+
+\title{Response to the Reviews}
+\author{Shiyu Ji}
+\maketitle
+
+\begin{questions}
+\section{Reviewer 1}
+\question Several key issues are not presented clearly, making the paper hard to be followed. For instance, the paper discussed the n-truthful property of the proposed mechanism, during which the authors assumed that the proposed mechanism is strategyproof. So, it is better to give a lemma or a theorem to explicitly prove that the proposed mechanism is strategyproof. Actually, only Lemma 3 in this paper is related to this issue. Nevertheless, this Lemma still has not shown the strategyproof property explicitly. This makes the readers hard to follow this paper, especially for the readers who do not know this area very well. The paper requires the reader to be familiar with the theory of auctions. It is better to spend more time giving some background on auctions. 
+\begin{solution}
+I have made Lemma 3 more clear. Now it clearly states that for the given $n_i$ profile, the discrete crowdsensing game achieves strategyproof equilibrium. I also gave some texts before Lemma 3: before we introduce our main results, we need Lemma 3, which gives the strategyproof equilibrium for the discrete crowdsensing game. Hope by doing this the readers can better follow the logic flow. 
+\end{solution}
+
+\question The model in this paper has some limitations. The authors did not consider some important issues in the platform, which are generally concerned in other papers, such as the number of tasks to be finished and the budget constraint of the platform to finish these tasks. When these issues are taken into consideration, the problem might become more difficult. Despite this, it is better to give an explanation or discussion on this, to make the proposed mechanism practical. 
+
+
+\question In this paper, the authors assume that the range of each user’s cost unit is known to the platform and each user has a maximum payment. The proposed mechanism totally relies on the parameters in the assumption. However, the paper did not mention how to get the parameters in a real crowdsensing system.
+
+\question Some important related literatures are missing.
+
+\section{Reviewer 2}
+\question In Section VII, the simulations demonstrate that the authors’ crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. However, if we do not consider the collusion attack problem, how are about the performance of the proposed crowdsensing incentive mechanism compared to other existing ones? The authors did not discuss it.  
+
+\question In Page 1, the authors say “But like other penetration analysis, there is no guarantee of guard against unexamined cases”. However, in Page 9, they conclude that the proposed crowdsensing incentive mechanism can resist any collusion attack. So, if there exists an unexamined collusion attack except those ones in the paper, can the  crowdsensing incentive mechanism be against it?  which is not clear in the paper.
+
+\question In Page 4 Section IV, “e” should be modified to “we”.
+
+\question In Page 2, the caption of Table 1  should be on the top of itself.
+
+\section{Reviewer 3}
+\question The limitation of this paper is that it only studies two specific types of crowdsensing systems, where the user's participation level is measured by sensing time and the number of sensing tasks respectively. There are also other crowdsensing systems, for example, users can also submit the set of crowdsensing tasks to perform with their cost.
+
+\question For the first type of crowdsensing model, where the user's participation level is measured by sensing time, only a strategyproof, but not group strategyproof, incentive mechanism is described.
+
+\question Typos: 
+In Section I, ``For another group of typical crowdsensing game'', ``When the possibility that colluding nodes can trade profit among them''
+In Section II.B, ``a equilibrium''
+In Section III, ``We also present an example to present''
+In Section IV, ``e leverage...''
+
+\section{Reviewer 4}
+\question My major concern is that the paper is more of a kind of reverse engineering. The main architecture is similar to those in references [14][17][20]. The analysis tools are almost directly applied to the crowdsensing platform, without addressing the unique features of crowdsensing platform, which is different from other scenarios. My detailed comments are as follows:
+
+\question First, the authors should justify the motivation for users to collude. Normally, crowdsensing users may not be aware of the identity of other users. Collusion is very hard to be conducted when the cost of coordinating colluders’ actions is high. The author did mention that one person may own multiple devices and collude among those devices. But a user may own 2-3 devices, while the entire user population may be on the scale of thousand. 
+
+\question I want to know whether the platform utility will be affected by adopting the proposed collusion-resistant mechanism. Equation (2) gives the platform utility, but afterwards there is no theoretical or numerical analysis on the platform utility. The objective of the platform operator may be more focused on utility maximization rather than eliminating all the collusions.
+
+\question Equation (3) and (4) needs clearer explanation. Notations $s*_S$ and $s*_{\overline{S}}$ should be defined. It should be clearly stated that $s*_S$ is the strategy profile of the users in set $S$, and $\overline{S}$ is the complementary set of $S$. 
+
+\question It is strange that the required sensing time, computed by the crowdsensing platform, only depends on the reported cost of users, just for the sake of collusion-resistance. The required sensing time is associated with the sensing task itself. I wonder if the collusion-resistant incentive mechanism can only manipulate the payment $p_i$ rather than the required sensing time $t_i$. 
+
+\question The evaluation setting is very confusing. I don’t understanding why “a colluded user i’s cost unit is 1.0, and the perturbation size is 2.0. Then this user i has probability of 25\% to claim $s_i$ = 0,01, and 75\% to claim a strategy larger than 0.01” , where did the figures 25\% and 75\% come from? Can it be 10\% and 90\%? Also, if some users collude, they will choose the optimal reported cost rather than randomly choosing a cost to report, which may hurt their utility.  So I don’t think the results in Fig. 5---10 are valid. Also, the utility comparison of the platform operator under non-collusion-resistant and collusion-resistant mechanisms is wanted. 
+
+\question Typos, line 50, page 4, left column, “e leverage”. Line 10, page 5, left column, PDG is not defined.
+\end{questions}
+\end{document}
+
