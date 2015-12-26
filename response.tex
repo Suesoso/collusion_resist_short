@@ -19,14 +19,22 @@ I have made Lemma 3 more clear. Now it clearly states that for the given $n_i$ p
 \end{solution}
 
 \question The model in this paper has some limitations. The authors did not consider some important issues in the platform, which are generally concerned in other papers, such as the number of tasks to be finished and the budget constraint of the platform to finish these tasks. When these issues are taken into consideration, the problem might become more difficult. Despite this, it is better to give an explanation or discussion on this, to make the proposed mechanism practical. 
-
+\begin{solution}
+I have revised the main algorithm to consider these factors: the number of tasks to finish and the budget constraint. This is done by adding the number of sensing tasks $R$ and the budget constraint $n\cdot P_m < B$, where $n$ is the entire user population, $P_m$ is the maximum payment to any user and $B$ is the upper bound of the budget. I have also reflected these changes and evaluated their performance in the experimental section. Hope by doing this our mechanism can have more practical value.
+\end{solution}
 
 \question In this paper, the authors assume that the range of each user’s cost unit is known to the platform and each user has a maximum payment. The proposed mechanism totally relies on the parameters in the assumption. However, the paper did not mention how to get the parameters in a real crowdsensing system.
+\begin{solution}
+The range of each user cost unit can be inferred from historical records. This point has been verified by Koutsopoulos's work. I have also clarified how to choose the maximum payment $P_m$. It can be related to the budge $B$ satisfying $n\cdot P_m < B$. From the experiments, usually each game can only assume less than 10\% of the budget. Thus the game is budget-feasible. 
+\end{solution}
 
 \question Some important related literatures are missing.
 
 \section{Reviewer 2}
 \question In Section VII, the simulations demonstrate that the authors’ crowdsensing incentive mechanism can achieve group strategyproof and n-truthful equilibrium simultaneously. However, if we do not consider the collusion attack problem, how are about the performance of the proposed crowdsensing incentive mechanism compared to other existing ones? The authors did not discuss it.  
+\begin{solution}
+Previously the experiment design is not good, since to show the security properties such as achieving group strategyproofness, one has to do it in theory rigorously, rather than simulations. Now I decide to rebuild the experiments and compare the performance of our mechanism to other works such as Koutsopoulos's.
+\end{solution}
 
 \question In Page 1, the authors say “But like other penetration analysis, there is no guarantee of guard against unexamined cases”. However, in Page 9, they conclude that the proposed crowdsensing incentive mechanism can resist any collusion attack. So, if there exists an unexamined collusion attack except those ones in the paper, can the  crowdsensing incentive mechanism be against it?  which is not clear in the paper.
 
