@@ -218,10 +218,8 @@ Here $t$ is the upper bound of collusion size that the mechanism can resist. It 
 {\color{black}
 \section{System Models and Problem Formulation}
 \label{sec:PFSM}
-{\color{black}
 In this section, we formalize a popular type of crowdsensing scenarios, and then describe a typical strategyproof incentive mechanism. We also present an example to illustrate how collusion attack can make this incentive mechanism fail. %At last we will discuss the assumptions of discrete crowdsensing game.
 %We will also discuss the privacy preserving problem against traffic analysis and timing attacks.
-}
 
 \subsection{\color{black} A Typical Strategyproof Crowdsensing Game}
 We have discussed the basics of crowdsensing games in Section \ref{subsec:CG}. However, we have not given any closed-form of each user\rq{}s sensing cost $c_i$. According to \cite{koutsopoulos2013optimal}, the sensing cost should increase with the user\rq{}s participation level. For real-world applications, usually sensing time can be a good metric of each user's participation. For example, more time the user spends on sensing, more sensed data the user can contribute, and more sensing cost may be incurred. We denote by $t_i$ the sensing time (or participation level in more general sense) of user $i$, and let $\kappa_i$ be the cost unit of user $i$. Then we have the cost $c_i=\kappa_it_i$. Given (\ref{eqn:user_utility_1}), we have
@@ -242,7 +240,11 @@ We now present a general incentive mechanism that can achieve strategyproof equi
 \end{enumerate}
 To be strategyproof, our incentive mechanism requires all users to be honest on their claimed cost units $s_i$. That is, we desire $s_i = \kappa_i$ for each user $i$. To achieve this goal, we need delicate closed-forms of payment $p_i$ and required sensing time $t_i$. It turns out that the concrete mechanism design is open-ended and there exist many different solutions. Since there are extensive literatures \cite{koutsopoulos2013optimal,luo2014profit,zhang2014free,liu2014social} on the solutions to achieve strategyproofness in similar scenarios, we leave the discussions in Appendix \ref{sec:dsim}.
 
-\subsection{An Example of Collusion on Strategyproof crowdsensing Game}
+{\color{blue}
+Note that the mechanism above captures the two most important characteristics of crowdsensing: workload (sensing time) and payment. Practical crowdsensing game may require additional restrictions. For example, each user can submit a set of sensing tasks, or the tasks are not uniform on workload, etc. Most of these restrictions are not well defined, i.e., vary among different games. In this paper, we focus on the most general typical model as above.
+}
+
+\subsection{An Example of Collusion on Strategyproof Crowdsensing Game}
 Unfortunately, a strategyproof incentive mechanism is usually not strong enough to resist collusion rigorously. 
 {\color{black}
 For example, suppose a game has two users $i,j$ s.t. $\kappa_i = \kappa_j = 1$. Given the user strategies $s_i$ and $s_j$, for user $i$ let its sensing time be $t_i(s_i, s_j)=s_j\mathrm{e}^{-s_i}$ and let its payment be $$p_i(s_i, s_j)=s_it_i(s_i, s_j)+\int_{s_i}^{+\infty}t_i(s, s_j)\mathrm{d}s=(s_i+1)s_j\mathrm{e}^{-s_i}.$$ The case of user $j$ is analogous. Thus the user utilities are 
