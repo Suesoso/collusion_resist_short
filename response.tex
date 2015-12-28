@@ -27,7 +27,7 @@ I have revised the main algorithm to consider these factors: the number of tasks
 
 \question In this paper, the authors assume that the range of each user’s cost unit is known to the platform and each user has a maximum payment. The proposed mechanism totally relies on the parameters in the assumption. However, the paper did not mention how to get the parameters in a real crowdsensing system.
 \begin{solution}
-The range of each user cost unit can be inferred from historical records. This point has been verified by Koutsopoulos's work. I have also clarified how to choose the maximum payment $P_m$. It can be related to the budge $B$ satisfying $n\cdot P_m \leq B$. From the experiments, usually each game can only assume less than 10\% of the budget. Thus the game is budget-feasible. 
+The range of each user cost unit can be inferred from historical records. This point has been verified by Koutsopoulos's work. I have also clarified how to choose the maximum payment $P_m$. It can be related to the budget $B$ satisfying $n\cdot P_m \leq B$. From the experiments, usually each game can only consume less than 10\% of the budget. Thus the game is budget-feasible. 
 \end{solution}
 
 \question Some important related literatures are missing.
@@ -43,7 +43,7 @@ Previously the experiment design is not good, since to show the security propert
 
 \question In Page 1, the authors say “But like other penetration analysis, there is no guarantee of guard against unexamined cases”. However, in Page 9, they conclude that the proposed crowdsensing incentive mechanism can resist any collusion attack. So, if there exists an unexamined collusion attack except those ones in the paper, can the  crowdsensing incentive mechanism be against it?  which is not clear in the paper.
 \begin{solution}
-Since we have eliminate the possibility of any collusion attack even with profit trading in theory rigorously, it is safe to say that our mechanism can resist any collusion attack in any form. 
+Since we have eliminated the possibility of any collusion attack even with profit trading in theory rigorously, it is safe to say that our mechanism can resist any collusion attack in any form. 
 We have added more discussions regarding this point in Section IX.
 \end{solution}
 
@@ -60,8 +60,8 @@ This problem has been fixed.
 \section{Reviewer 3}
 \question The limitation of this paper is that it only studies two specific types of crowdsensing systems, where the user's participation level is measured by sensing time and the number of sensing tasks respectively. There are also other crowdsensing systems, for example, users can also submit the set of crowdsensing tasks to perform with their cost.
 \begin{solution}
-Even though our models are not the unique solutions to crowdsensing game, they are quite general and typical. They capture the most important features of crowdsensing: payment and workload (sensing time of each user). The equation $u = p - \kappa t$ should reflect most crowdsensing games. If some users cannot participate due to certain restrictions, they can simply quit. All the participating users can give a game which is convenient to research. On the other hand, many restrictions such as different sets of tasks for different users are difficult to define. Thus in this paper we decide to focus on the most general and typical crowdsensing game model in existing works. 
-I have added more discussions about this point in Section III.A.
+Even though our paper cannot cover all the possibilities in crowdsensing games, our models are quite general and typical. They capture the most important features of crowdsensing: payment and workload (sensing time of each user). The equation $u = p - \kappa t$ should reflect most crowdsensing games. If some users cannot participate due to certain restrictions, they can simply quit. All the participating users can give a game which is convenient to research. On the other hand, many restrictions such as different sets of tasks for different users are difficult to define. Thus in this paper we decide to focus on the most general and typical crowdsensing game model in existing works. 
+I have added more discussions about this point in Section III.A. The new texts are in blue.
 \end{solution}
 
 \question For the first type of crowdsensing model, where the user's participation level is measured by sensing time, only a strategyproof, but not group strategyproof, incentive mechanism is described.
@@ -90,8 +90,8 @@ We have only researched one typical game model. If one considers the very practi
 
 \question First, the authors should justify the motivation for users to collude. Normally, crowdsensing users may not be aware of the identity of other users. Collusion is very hard to be conducted when the cost of coordinating colluders’ actions is high. The author did mention that one person may own multiple devices and collude among those devices. But a user may own 2-3 devices, while the entire user population may be on the scale of thousand. 
 \begin{solution}
-It is good to add more discussions on the collusion size and our results. Firstly, it is usually difficult to guarantee the upper bound of collusion size, since the adversarial always try to hide such information. Secondly, if such an upper bound can be guaranteed, then any strategyproof mechanism can be group strategyproof by satisfying a much weaker condition, i.e., the size of smallest cycles in the PDG is larger than the upper bound of collusion size. 
-We have added more discussions in Sections I and IV. Corollary 1 has been added to reflect the upper bound of collusion size and our results. The new text has been highlighted in blue.
+Better utilities for the nodes motivate the users to collude. This has been discussed in the introduction. However, in the previous versions, we did not discuss the collusion size. In the real-world applications, the collusion size is much smaller compared to the total user population. It is good to add more discussions on the collusion size and its relations with our results. Firstly, it is usually difficult to guarantee the upper bound of collusion size, since the adversarial always try to hide such information. Secondly, if such an upper bound can be guaranteed, then any strategyproof mechanism can be group strategyproof by satisfying a much weaker condition, i.e., the size of smallest cycles in the PDG is larger than the upper bound of collusion size. 
+We have added more discussions in Sections I and IV. Corollary 1 has been added to reflect the relations between the upper bound of collusion size and our results. The new text has been highlighted in blue.
 \end{solution}
 
 \question I want to know whether the platform utility will be affected by adopting the proposed collusion-resistant mechanism. Equation (2) gives the platform utility, but afterwards there is no theoretical or numerical analysis on the platform utility. The objective of the platform operator may be more focused on utility maximization rather than eliminating all the collusions.
